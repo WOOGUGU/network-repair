@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.PreliminarySchemeMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.domain.PreliminaryScheme">
+            <id property="FK_workorder_number" column="FK_workorder_number" jdbcType="INTEGER"/>
+            <result property="FK_job_number" column="FK_job_number" jdbcType="INTEGER"/>
+            <result property="preliminary_program" column="preliminary_program" jdbcType="CHAR"/>
+            <result property="preliminar_time" column="preliminar_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        FK_workorder_number,FK_job_number,preliminary_program,
+        preliminar_time
+    </sql>
+</mapper>

@@ -29,7 +29,7 @@ public class MaintenanceRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "FK_workorder_number", type = IdType.ID_WORKER)
+    @TableId(value = "FK_workorder_number", type = IdType.INPUT)
     private Integer fkWorkorderNumber;
 
     @TableField("FK_job_number")
@@ -37,6 +37,7 @@ public class MaintenanceRecord implements Serializable {
 
     private String maintenanceRecord;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date maintenanceTime;
 
     @TableField(fill = FieldFill.INSERT)

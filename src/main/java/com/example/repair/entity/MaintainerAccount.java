@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -29,7 +30,7 @@ public class MaintainerAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "job_number", type = IdType.ID_WORKER)
+    @TableId(value = "job_number", type = IdType.INPUT)
     private Integer jobNumber;
 
     private String name;

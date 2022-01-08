@@ -29,7 +29,7 @@ public class StudentAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "student_number", type = IdType.ID_WORKER)
+    @TableId(value = "student_number", type = IdType.INPUT)
     private Integer studentNumber;
 
     private String name;

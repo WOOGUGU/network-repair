@@ -1,6 +1,5 @@
 package com.example.repair.controller.maintainer;
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.repair.entity.MaintainerAccount;
@@ -16,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class maintainerController {
@@ -33,7 +29,7 @@ public class maintainerController {
     WorkorderInformationService workorderInformationService;
 
     @GetMapping("/maintainer/preliminarylist")//请求方法是get
-    public JSONObject getPreliminaryListByMaintainerNumber(Integer maintainer_number ){
+    public com.alibaba.fastjson.JSONObject getPreliminaryListByMaintainerNumber(Integer maintainer_number ){
         if (maintainer_number == null){ return ResultCode.getJson("工号为空！请重新访问");}
 
         QueryWrapper<PreliminaryScheme> queryWrapper=new QueryWrapper<>();
@@ -80,7 +76,7 @@ public class maintainerController {
 
 
     @GetMapping("login/maintainer")//测试成功
-    public JSONObject login(String jobnumber,String passport){
+    public JSONObject login(String jobnumber, String passport){
 
         if (jobnumber == null||jobnumber.equals("")){//判断用户名和密码是否为空或者空串
             return ResultCode.getJson("用户名或密码为空");

@@ -33,6 +33,7 @@ public class WorkorderInformation implements Serializable {
     @TableId(value = "workorder_number", type = IdType.AUTO)
     private Integer workorderNumber;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date initiationTime;
 
     private Integer contactInformation;

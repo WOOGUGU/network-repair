@@ -40,6 +40,7 @@ public class PreliminaryScheme implements Serializable {
 
     private String preliminaryProgram;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date preliminarTime;
 
     @TableField(fill = FieldFill.INSERT)

@@ -2,10 +2,6 @@ package com.example.repair.util;
 
 import com.alibaba.fastjson.JSONObject;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> aa98b19 (有关主码、一些有关时间类的改正)
 /**
  * 返回码
  *

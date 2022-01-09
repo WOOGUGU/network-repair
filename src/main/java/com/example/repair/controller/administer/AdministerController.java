@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 管理员获得工单列表
+ * 管理员Controller
  *
  * @author WOOGUGU
  */

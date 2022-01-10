@@ -17,14 +17,16 @@ public class ResultCode {
     public static JSONObject requestSucesse() {
         JSONObject json = new JSONObject();
         json.put("code", ResponseCode.SUCCESS.value);
-        json.put("data", "0");
+        json.put("message", "发现用户");
+        json.put("data", "1");
         return json;
     }
 
     public static JSONObject requestFail() {
         JSONObject json = new JSONObject();
-        json.put("code", ResponseCode.OFF_LINE.value);
-        json.put("data", "1");
+        json.put("code", ResponseCode.IndexLost.value);
+        json.put("message", "未发现用户");
+        json.put("data", "0");
         return json;
     }
 
@@ -56,7 +58,7 @@ public class ResultCode {
         JSONObject json = new JSONObject();
         json.put("code", ResponseCode.FAIL.value);
         json.put("message", message);
-
+        json.put("data", 0);
         return json;
     }
 

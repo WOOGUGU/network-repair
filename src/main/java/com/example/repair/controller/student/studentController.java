@@ -41,7 +41,7 @@ public class studentController {
         {
                 workorderInformation.setMaintenanceSatisfaction(maintenance_satisfaction);
                 workorderInformation.setEvaluation(evaluation);
-                workorderInformation.setWorkorderState("2");
+                workorderInformation.setEvaluationStatus("2");
                 workorderInformationService.updateById(workorderInformation);
                 return ResultCode.requestSucesse();
         }

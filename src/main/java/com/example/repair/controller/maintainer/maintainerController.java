@@ -29,7 +29,7 @@ public class maintainerController {
     @Autowired
     WorkorderInformationService workorderInformationService;
 
-    @GetMapping("/maintainer/preliminarylist")//请求方法是get
+    @GetMapping("/maintainer/preliminarylist")//请求方法是get          维修员获得自己的工单
     public JSONObject getPreliminaryListByMaintainerNumber(Long maintainer_number ){
         if (maintainer_number == null){ return ResultCode.getJson(ResponseCode.ParamLost.value,"参数缺失");}
 
@@ -40,7 +40,7 @@ public class maintainerController {
         return ResultCode.getJson(preliminarySchemeList);
 
     }
-    @GetMapping("/maintainer/maintenance")//已测试成功
+    @GetMapping("/maintainer/maintenance")//已测试成功    维修员填写工单记录
     public JSONObject fillWorkorder (Long workorder_number,String maintenance_record,Long maintainer_number)
     {
         if (workorder_number == null || maintainer_number == null)//工单详细记录可以不填？个人认为，但是工单号和工人号必须填
@@ -61,7 +61,7 @@ public class maintainerController {
             return ResultCode.requestFail();
         }
     }
-    @GetMapping("/maintainer/preliminary")//测试成功
+    @GetMapping("/maintainer/preliminary")//测试成功   维修员查看某个工单
     public JSONObject getOneWorkorder(Long workorder_number){
         if (workorder_number == null)
             return ResultCode.getJson(ResponseCode.ParamLost.value,"参数缺失");
@@ -76,7 +76,7 @@ public class maintainerController {
     }
 
 
-    @GetMapping("login/maintainer")//测试成功
+    @GetMapping("login/maintainer")//测试成功  登录
     public JSONObject login(Long jobnumber, String passport){
 
         if (jobnumber == null||jobnumber.equals("")){//判断用户名和密码是否为空或者空串

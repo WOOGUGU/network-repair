@@ -10,6 +10,7 @@ import com.example.repair.service.MaintainerAccountService;
 import com.example.repair.service.MaintenanceRecordService;
 import com.example.repair.service.PreliminarySchemeService;
 import com.example.repair.service.WorkorderInformationService;
+import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,8 @@ public class maintainerController {
     WorkorderInformationService workorderInformationService;
 
     @GetMapping("/maintainer/preliminarylist")//请求方法是get
-    public com.alibaba.fastjson.JSONObject getPreliminaryListByMaintainerNumber(Integer maintainer_number ){
-        if (maintainer_number == null){ return ResultCode.getJson("工号为空！请重新访问");}
+    public JSONObject getPreliminaryListByMaintainerNumber(Long maintainer_number ){
+        if (maintainer_number == null){ return ResultCode.getJson(ResponseCode.ParamLost.value,"参数缺失");}
 
         QueryWrapper<PreliminaryScheme> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("FK_Maintainer_Account",maintainer_number);//工号=？
@@ -40,11 +41,11 @@ public class maintainerController {
 
     }
     @GetMapping("/maintainer/maintenance")//已测试成功
-    public JSONObject fillWorkorder (Integer workorder_number,String maintenance_record,Integer maintainer_number)
+    public JSONObject fillWorkorder (Long workorder_number,String maintenance_record,Long maintainer_number)
     {
         if (workorder_number == null || maintainer_number == null)//工单详细记录可以不填？个人认为，但是工单号和工人号必须填
         {
-                return ResultCode.getJson("参数错误！请检查必要上传信息！");
+                return ResultCode.getJson(ResponseCode.ParamLost.value,"参数缺失");
         }
 
         MaintenanceRecord maintenanceRecord=new MaintenanceRecord();//创建一个新对象
@@ -53,17 +54,17 @@ public class maintainerController {
         maintenanceRecord.setFkJobNumber(maintainer_number);//set
         if (maintenanceRecordService.save(maintenanceRecord))//判断是否成功 默认参数是布尔，后期可以改动
         {
-            return ResultCode.getJson("上传成功！");
+            return ResultCode.requestSucesse();
         }
         else
         {
-            return ResultCode.getJson("上传失败");
+            return ResultCode.requestFail();
         }
     }
     @GetMapping("/maintainer/preliminary")//测试成功
-    public JSONObject getOneWorkorder(Integer workorder_number){
+    public JSONObject getOneWorkorder(Long workorder_number){
         if (workorder_number == null)
-            return ResultCode.getJson("工单号为空");
+            return ResultCode.getJson(ResponseCode.ParamLost.value,"参数缺失");
 
         QueryWrapper<WorkorderInformation> queryWrapper= new QueryWrapper<>();
         queryWrapper.eq("workorder_number",workorder_number);
@@ -76,7 +77,7 @@ public class maintainerController {
 
 
     @GetMapping("login/maintainer")//测试成功
-    public JSONObject login(String jobnumber, String passport){
+    public JSONObject login(Long jobnumber, String passport){
 
         if (jobnumber == null||jobnumber.equals("")){//判断用户名和密码是否为空或者空串
             return ResultCode.getJson("用户名或密码为空");
@@ -93,11 +94,11 @@ public class maintainerController {
         MaintainerAccount maintainerAccount = maintainerAccountService.getOne(queryWrapper);
          if (maintainerAccount == null)//要是没查到
          {
-             return ResultCode.getJson("用户名或密码不正确");
+             return ResultCode.requestFail();
          }
          else
          {  //登陆成功
-             return ResultCode.getJson("登录成功");
+             return ResultCode.requestSucesse();
          }
     }
 

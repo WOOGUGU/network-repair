@@ -2,7 +2,6 @@ package com.example.repair.util;
 
 import com.alibaba.fastjson.JSONObject;
 
-
 /**
  * 返回码
  *
@@ -14,6 +13,20 @@ public class ResultCode {
      * 2. message: 响应消息
      * 3. result : 响应中的数据
      */
+
+    public static JSONObject requestSucesse() {
+        JSONObject json = new JSONObject();
+        json.put("code", ResponseCode.SUCCESS.value);
+        json.put("data", "0");
+        return json;
+    }
+
+    public static JSONObject requestFail() {
+        JSONObject json = new JSONObject();
+        json.put("code", ResponseCode.OFF_LINE.value);
+        json.put("data", "1");
+        return json;
+    }
 
     public static JSONObject getJson(Object data) {
         JSONObject json = new JSONObject();
@@ -36,6 +49,14 @@ public class ResultCode {
         json.put("code", code);
         json.put("message", message);
         json.put("data", data);
+        return json;
+    }
+
+    public static JSONObject Fail(String message) {
+        JSONObject json = new JSONObject();
+        json.put("code", ResponseCode.FAIL.value);
+        json.put("message", message);
+
         return json;
     }
 

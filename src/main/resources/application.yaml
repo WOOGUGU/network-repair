@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://cn-zz-bgp-5.natfrp.cloud:11831/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: MySQL8.0@root
+    password: Root_12root
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

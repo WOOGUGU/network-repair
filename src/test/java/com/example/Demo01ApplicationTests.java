@@ -23,7 +23,7 @@ class Demo01ApplicationTests {
     void contextLoads() {
 
         MaintainerAccount maintainerAccount=new MaintainerAccount();
-        maintainerAccount.setJobNumber(1);
+        maintainerAccount.setJobNumber(1L);
         maintainerAccount.setName("ad1");
         maintainerAccount.setPassport("123456");
         maintainerAccountService.updateById(maintainerAccount);
@@ -33,7 +33,7 @@ class Demo01ApplicationTests {
     @Test
     void insertTest() {
         AdministratorAccount administratorAccount=new AdministratorAccount();
-        administratorAccount.setJobNumber(9);
+        administratorAccount.setJobNumber(9L);
         administratorAccount.setName("user8");
         administratorAccount.setPassport("password");
         administratorAccountService.save(administratorAccount);
@@ -45,11 +45,11 @@ class Demo01ApplicationTests {
         AdministratorAccount administratorAccount=new AdministratorAccount();
         AdministratorAccount administratorAccount1=new AdministratorAccount();
 
-        administratorAccount.setJobNumber(9);
+        administratorAccount.setJobNumber(9L);
         administratorAccount.setName("ad08");
         administratorAccount.setPassport("123456");
 
-        administratorAccount1.setJobNumber(10);
+        administratorAccount1.setJobNumber(10L);
         administratorAccount1.setName("ad04");
         administratorAccount1.setPassport("123456");
 

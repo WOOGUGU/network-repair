@@ -30,16 +30,17 @@ public class PreliminaryScheme implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "FK_workorder_number", type = IdType.INPUT)
-    private Integer fkWorkorderNumber;
+    private Long fkWorkorderNumber;
 
     @TableField("FK_job_number")
-    private Integer fkJobNumber;
+    private Long fkJobNumber;
 
     @TableField("FK_Maintainer_Account")
-    private Integer fkMaintainerAccount;
+    private Long fkMaintainerAccount;
 
     private String preliminaryProgram;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date preliminarTime;
 
     @TableField(fill = FieldFill.INSERT)

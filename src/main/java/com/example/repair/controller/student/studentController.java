@@ -5,6 +5,7 @@ import com.example.repair.entity.StudentAccount;
 import com.example.repair.entity.WorkorderInformation;
 import com.example.repair.service.StudentAccountService;
 import com.example.repair.service.WorkorderInformationService;
+import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +26,46 @@ public class studentController {
     @Autowired
     StudentAccountService studentAccountService;
 
+    // 学生提交评价
+    @GetMapping("/student/evaluate")
+    public Object submitorder(
+            Long student_number,
+            Long workorder_number,
+            float maintenance_satisfaction,
+            String evaluation
+    ) {
+        if (student_number == null || workorder_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数！");
+        }
+
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        WorkorderInformation workorderInformation = new WorkorderInformation();
+        queryWrapper.eq("workorder_number", workorder_number);
+        workorderInformation = workorderInformationService.getOne(queryWrapper);
+        if (workorderInformation.getFkStudentNumber().equals(student_number) && workorderInformation.getEvaluationStatus().equals("1"))//只有待评价的订单才可以评价
+        {
+            workorderInformation.setMaintenanceSatisfaction(maintenance_satisfaction);
+            workorderInformation.setEvaluation(evaluation);
+            workorderInformation.setEvaluationStatus("2");
+            workorderInformationService.updateById(workorderInformation);
+            return ResultCode.requestSucesse();
+        } else {
+            return ResultCode.Fail("没有权限或订单已评价");
+        }
+        //根据工单号查出来，看看是不是这个本人，然后更新信息，如果不是本人返回400，加上”无权限“
+    }
+
     // 学生提交工单
     @GetMapping("/student/submitorder")
-    public Object submitorder(Integer student_number, Integer contact_information, String workorder_content, String address, String picture_address) {
+    public Object submitorder(
+            Long student_number,
+            String contact_information,
+            String workorder_content,
+            String address,
+            String picture_address
+    ) {
         if (student_number == null || contact_information == null || workorder_content == null || address == null) {
-            return ResultCode.getJson("参数错误！请检查必要上传信息！");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数！");
         }
 
         WorkorderInformation workorderInformation = new WorkorderInformation();
@@ -41,17 +77,17 @@ public class studentController {
         workorderInformation.setWorkorderState("1");
 
         if (workorderInformationService.save(workorderInformation)) {
-            return ResultCode.getJson("上传成功！");
+            return ResultCode.requestSucesse();
         } else {
-            return ResultCode.getJson("上传失败！");
+            return ResultCode.requestFail();
         }
     }
 
     // 学生查看工单列表
     @GetMapping("/student/orderlist")
-    public Object orderList(Integer student_number) {
+    public Object orderList(Long student_number) {
         if (student_number == null) {
-            return ResultCode.getJson("学号为空！请重新访问");
+            return ResultCode.Fail("学号为空！请重新访问");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -62,9 +98,9 @@ public class studentController {
 
     // 学生查看某工单详细信息
     @GetMapping("/student/getorder")
-    public Object getOrder(Integer workorder_number){
-        if(workorder_number==null){
-            return ResultCode.getJson("工单号为空！请重新访问");
+    public Object getOrder(Long workorder_number) {
+        if (workorder_number == null) {
+            return ResultCode.Fail("工单号为空");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -74,23 +110,25 @@ public class studentController {
     }
 
     @GetMapping("/login/student")//测试成功
-    public Object login(String student_number, String passport) {
+    public Object login(Long student_number, String passport) {
         //判断用户名和密码是否为空或者空串
         if (student_number == null || student_number.equals("")) {
-            return ResultCode.getJson("用户名或密码为空");
+            return ResultCode.Fail("用户名或密码为空");
         }
         if (passport == null || passport.equals("")) {
-            return ResultCode.getJson("用户名或密码为空");
+            return ResultCode.Fail("用户名或密码为空");
         }
 
         QueryWrapper<StudentAccount> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("student_number", student_number)
-                .eq("passport", passport);//查询有没有对应的人
+        //查询有没有对应的人
+        queryWrapper
+                .eq("student_number", student_number)
+                .eq("passport", passport);
         StudentAccount studentAccount = studentAccountService.getOne(queryWrapper);
         if (studentAccount == null) {
-            return ResultCode.getJson("用户名或密码不正确");
+            return ResultCode.requestFail();
         } else {  //登陆成功
-            return ResultCode.getJson("登录成功");
+            return ResultCode.requestSucesse();
         }
     }
 }

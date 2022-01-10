@@ -84,7 +84,7 @@ public class AdministerController {
 
     // 登入
     @GetMapping("/login/administer")
-    public Object login(String jobnumber, String passport) {
+    public Object login(Long jobnumber, String passport) {
 
         if (jobnumber == null || jobnumber.equals("")) {//判断用户名和密码是否为空或者空串
             return ResultCode.getJson(ResponseCode.FAIL.value,"1","用户名或密码为空");

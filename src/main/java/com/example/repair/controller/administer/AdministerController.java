@@ -34,7 +34,7 @@ public class AdministerController {
     @Autowired
     AdministratorAccountService administratorAccountService;
 
-    // 管理员获取工单和初步方案
+    // 管理员获取工单
     @GetMapping("/administer/orderlist")
     public Object orderList() {
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -47,7 +47,7 @@ public class AdministerController {
     @GetMapping("/administer/getorder")
     public Object getOrder(Long workorder_number) {
         if (workorder_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value,"缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -65,9 +65,14 @@ public class AdministerController {
 
     // 管理员填写或选择初步方案
     @GetMapping("/administer/preliminary")
-    public Object preliminary(Long workorder_number, String preliminary_porgram, Long administrator_number, Long maintainer_number) {
+    public Object preliminary(
+            Long workorder_number,
+            String preliminary_porgram,
+            Long administrator_number,
+            Long maintainer_number
+    ) {
         if (workorder_number == null || administrator_number == null || maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value,"缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
         }
 
         PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
@@ -86,25 +91,21 @@ public class AdministerController {
     @GetMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {
 
-        if (jobnumber == null || jobnumber.equals("")) {//判断用户名和密码是否为空或者空串
-            return ResultCode.getJson(ResponseCode.FAIL.value,"1","用户名或密码为空");
-
+        if (jobnumber == null || jobnumber.equals("")) {
+            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
         }
         if (passport == null || passport.equals("")) {
-            return ResultCode.getJson(ResponseCode.FAIL.value,"1","用户名或密码为空");
-
+            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
         }
 
         QueryWrapper<AdministratorAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("job_number", jobnumber)
-                .eq("passport", passport);//查询有没有对应的人
+                .eq("passport", passport);
         AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
-        if (administratorAccount == null)//要是没查到
-        {
+        if (administratorAccount == null) {
             return ResultCode.requestFail();
-        } else {  //登陆成功
+        } else {
             return ResultCode.requestSucesse();
-
         }
     }
 }

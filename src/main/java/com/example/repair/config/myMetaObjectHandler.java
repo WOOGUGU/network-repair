@@ -17,6 +17,8 @@ public class myMetaObjectHandler implements MetaObjectHandler {
         this.setFieldValByName("maintenanceTime",new Date(),metaObject);
         this.setFieldValByName("preliminarTime",new Date(),metaObject);
         this.setFieldValByName("initiationTime",new Date(),metaObject);
+        this.setFieldValByName("preliminarTime",new Date(),metaObject);
+        this.setFieldValByName("initiationTime",new Date(),metaObject);
         this.setFieldValByName("releaseTime",new Date(),metaObject);
     }
 

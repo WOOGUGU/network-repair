@@ -30,28 +30,29 @@ public class Notice implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "notice_number", type = IdType.AUTO)
-    private Integer noticeNumber;
+    private Long noticeNumber;
 
     private String noticeContent;
 
     private String noticeTitle;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date releaseTime;
 
     @TableField("FK_job_number")
-    private Integer fkJobNumber;
+    private Long fkJobNumber;
 
     @TableLogic
-    private Date deleted;
+    private Integer deleted;
 
     @Version
-    private Date version;
+    private Integer version;
 
     @TableField(fill = FieldFill.INSERT)
-    private Integer createTime;
+    private Date createTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Integer updateTime;
+    private Date updateTime;
 
 
 }

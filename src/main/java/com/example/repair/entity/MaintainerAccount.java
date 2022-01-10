@@ -31,7 +31,7 @@ public class MaintainerAccount implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "job_number", type = IdType.INPUT)
-    private Integer jobNumber;
+    private Long jobNumber;
 
     private String name;
 

@@ -31,11 +31,12 @@ public class WorkorderInformation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "workorder_number", type = IdType.AUTO)
-    private Integer workorderNumber;
+    private Long workorderNumber;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date initiationTime;
 
-    private Integer contactInformation;
+    private String contactInformation;
 
     private String address;
 
@@ -43,11 +44,19 @@ public class WorkorderInformation implements Serializable {
 
     private String pictureAddress;
 
+    private String fixedTime;
+
+    private String evaluationStatus;
+
+    private Float maintenanceSatisfaction;
+
+    private String evaluation;
+
         @ApiModelProperty(value = "1：待预处理；2：待维修；3：工单完成")
         private String workorderState;
 
     @TableField("FK_student_number")
-    private Integer fkStudentNumber;
+    private Long fkStudentNumber;
 
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

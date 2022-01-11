@@ -13,6 +13,7 @@ import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class AdministerController {
     @GetMapping("/administer/getorder")
     public Object getOrder(Long workorder_number) {
         if (workorder_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -64,7 +65,7 @@ public class AdministerController {
     }
 
     // 管理员填写或选择初步方案
-    @GetMapping("/administer/preliminary")
+    @PostMapping("/administer/preliminary")
     public Object preliminary(
             Long workorder_number,
             String preliminary_porgram,
@@ -72,7 +73,7 @@ public class AdministerController {
             Long maintainer_number
     ) {
         if (workorder_number == null || administrator_number == null || maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
         }
 
         PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
@@ -88,7 +89,7 @@ public class AdministerController {
     }
 
     // 登入
-    @GetMapping("/login/administer")
+    @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {
 
         if (jobnumber == null || "".equals(passport)) {

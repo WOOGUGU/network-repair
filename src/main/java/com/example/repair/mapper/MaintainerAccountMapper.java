@@ -1,12 +1,14 @@
 package com.example.repair.mapper;
 
-import com.example.repair.entity.MaintainerAccount;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.repair.entity.MaintainerAccount;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author ZBWKHH
@@ -14,5 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MaintainerAccountMapper extends BaseMapper<MaintainerAccount> {
+    List<MaintainerAccount> selectJobNumberAndName();
+
 
 }

@@ -5,9 +5,9 @@ import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.PreliminaryScheme;
 import com.example.repair.entity.WorkorderInformation;
-import com.example.repair.service.AdministratorAccountService;
-import com.example.repair.service.MaintainerAccountService;
-import com.example.repair.service.PreliminarySchemeService;
+import com.example.repair.service.impl.AdministratorAccountServiceImpl;
+import com.example.repair.service.impl.MaintainerAccountServiceImpl;
+import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
 import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
@@ -28,11 +28,11 @@ public class AdministerController {
     @Autowired
     WorkorderInformationServiceImpl workorderInformationService;
     @Autowired
-    PreliminarySchemeService preliminarySchemeService;
+    PreliminarySchemeServiceImpl preliminarySchemeService;
     @Autowired
-    MaintainerAccountService maintainerAccountService;
+    MaintainerAccountServiceImpl maintainerAccountService;
     @Autowired
-    AdministratorAccountService administratorAccountService;
+    AdministratorAccountServiceImpl administratorAccountService;
 
     // 管理员获取工单
     @GetMapping("/administer/orderlist")
@@ -56,10 +56,10 @@ public class AdministerController {
         return ResultCode.getJson(workorderInformationList);
     }
 
-    // 管理员获得全部维修人员信息
+    // 管理员获得全部维修人员基本信息
     @GetMapping("/administer/maintainerList")
     public Object maintainerList() {
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.getJobNumberAndNameList();
         return ResultCode.getJson(maintainerAccountList);
     }
 
@@ -81,9 +81,9 @@ public class AdministerController {
         preliminaryScheme.setFkJobNumber(administrator_number);
         preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
         if (preliminarySchemeService.save(preliminaryScheme)) {
-            return ResultCode.requestSucesse();
+            return ResultCode.getJson("1");
         } else {
-            return ResultCode.requestFail();
+            return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
         }
     }
 
@@ -91,21 +91,19 @@ public class AdministerController {
     @GetMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {
 
-        if (jobnumber == null || jobnumber.equals("")) {
-            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
-        }
-        if (passport == null || passport.equals("")) {
-            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
+        if (jobnumber == null || "".equals(passport)) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
         }
 
         QueryWrapper<AdministratorAccount> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("job_number", jobnumber)
+        queryWrapper
+                .eq("job_number", jobnumber)
                 .eq("passport", passport);
         AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
         if (administratorAccount == null) {
-            return ResultCode.requestFail();
+            return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "用户不存在");
         } else {
-            return ResultCode.requestSucesse();
+            return ResultCode.getJson("1", "用户存在");
         }
     }
 }

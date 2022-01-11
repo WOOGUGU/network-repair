@@ -1,14 +1,13 @@
 package com.example;
 
 import com.example.repair.entity.AdministratorAccount;
-import com.example.repair.entity.MaintainerAccount;
+import com.example.repair.mapper.MaintainerAccountMapper;
 import com.example.repair.service.AdministratorAccountService;
-import com.example.repair.service.MaintainerAccountService;
+import com.example.repair.service.impl.MaintainerAccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,32 +17,30 @@ class Demo01ApplicationTests {
     @Autowired
     AdministratorAccountService administratorAccountService;
     @Autowired
-    MaintainerAccountService maintainerAccountService;
+    MaintainerAccountServiceImpl maintainerAccountService;
+    @Autowired
+    MaintainerAccountMapper maintainerAccountMapper;
+
     @Test
     void contextLoads() {
-
-        MaintainerAccount maintainerAccount=new MaintainerAccount();
-        maintainerAccount.setJobNumber(1L);
-        maintainerAccount.setName("ad1");
-        maintainerAccount.setPassport("123456");
-        maintainerAccountService.updateById(maintainerAccount);
-
-
+        maintainerAccountService.getJobNumberAndNameList();
     }
+
     @Test
     void insertTest() {
-        AdministratorAccount administratorAccount=new AdministratorAccount();
+        AdministratorAccount administratorAccount = new AdministratorAccount();
         administratorAccount.setJobNumber(9L);
         administratorAccount.setName("user8");
         administratorAccount.setPassport("password");
         administratorAccountService.save(administratorAccount);
 
     }
+
     @Test
     void updateTest() {
-        List<AdministratorAccount> administratorAccountList=new ArrayList<>();
-        AdministratorAccount administratorAccount=new AdministratorAccount();
-        AdministratorAccount administratorAccount1=new AdministratorAccount();
+        List<AdministratorAccount> administratorAccountList = new ArrayList<>();
+        AdministratorAccount administratorAccount = new AdministratorAccount();
+        AdministratorAccount administratorAccount1 = new AdministratorAccount();
 
         administratorAccount.setJobNumber(9L);
         administratorAccount.setName("ad08");
@@ -52,7 +49,6 @@ class Demo01ApplicationTests {
         administratorAccount1.setJobNumber(10L);
         administratorAccount1.setName("ad04");
         administratorAccount1.setPassport("123456");
-
 
 
         administratorAccountList.add(administratorAccount);

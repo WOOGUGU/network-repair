@@ -5,14 +5,15 @@ import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.PreliminaryScheme;
 import com.example.repair.entity.WorkorderInformation;
-import com.example.repair.service.AdministratorAccountService;
-import com.example.repair.service.MaintainerAccountService;
-import com.example.repair.service.PreliminarySchemeService;
+import com.example.repair.service.impl.AdministratorAccountServiceImpl;
+import com.example.repair.service.impl.MaintainerAccountServiceImpl;
+import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
 import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,11 +29,11 @@ public class AdministerController {
     @Autowired
     WorkorderInformationServiceImpl workorderInformationService;
     @Autowired
-    PreliminarySchemeService preliminarySchemeService;
+    PreliminarySchemeServiceImpl preliminarySchemeService;
     @Autowired
-    MaintainerAccountService maintainerAccountService;
+    MaintainerAccountServiceImpl maintainerAccountService;
     @Autowired
-    AdministratorAccountService administratorAccountService;
+    AdministratorAccountServiceImpl administratorAccountService;
 
     // 管理员获取工单
     @GetMapping("/administer/orderlist")
@@ -47,7 +48,7 @@ public class AdministerController {
     @GetMapping("/administer/getorder")
     public Object getOrder(Long workorder_number) {
         if (workorder_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -56,15 +57,15 @@ public class AdministerController {
         return ResultCode.getJson(workorderInformationList);
     }
 
-    // 管理员获得全部维修人员信息
+    // 管理员获得全部维修人员基本信息
     @GetMapping("/administer/maintainerList")
     public Object maintainerList() {
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.getJobNumberAndNameList();
         return ResultCode.getJson(maintainerAccountList);
     }
 
     // 管理员填写或选择初步方案
-    @GetMapping("/administer/preliminary")
+    @PostMapping("/administer/preliminary")
     public Object preliminary(
             Long workorder_number,
             String preliminary_porgram,
@@ -72,7 +73,7 @@ public class AdministerController {
             Long maintainer_number
     ) {
         if (workorder_number == null || administrator_number == null || maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
         }
 
         PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
@@ -81,31 +82,29 @@ public class AdministerController {
         preliminaryScheme.setFkJobNumber(administrator_number);
         preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
         if (preliminarySchemeService.save(preliminaryScheme)) {
-            return ResultCode.requestSucesse();
+            return ResultCode.getJson("1");
         } else {
-            return ResultCode.requestFail();
+            return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
         }
     }
 
     // 登入
-    @GetMapping("/login/administer")
+    @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {
 
-        if (jobnumber == null || jobnumber.equals("")) {
-            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
-        }
-        if (passport == null || passport.equals("")) {
-            return ResultCode.getJson(ResponseCode.FAIL.value, "1", "用户名或密码为空");
+        if (jobnumber == null || "".equals(passport)) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
         }
 
         QueryWrapper<AdministratorAccount> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("job_number", jobnumber)
+        queryWrapper
+                .eq("job_number", jobnumber)
                 .eq("passport", passport);
         AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
         if (administratorAccount == null) {
-            return ResultCode.requestFail();
+            return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "用户不存在");
         } else {
-            return ResultCode.requestSucesse();
+            return ResultCode.getJson("1", "用户存在");
         }
     }
 }

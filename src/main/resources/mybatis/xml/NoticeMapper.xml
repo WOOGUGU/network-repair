@@ -15,7 +15,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        notice_number,notice_content,notice_title,
+        notice_number
+        ,notice_content,notice_title,
         release_time,FK_job_number,deleted,
         version,create_time,update_time
     </sql>

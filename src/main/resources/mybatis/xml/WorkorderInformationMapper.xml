@@ -18,7 +18,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        workorder_number,initiation_time,contact_information,
+        workorder_number
+        ,initiation_time,contact_information,
         address,workorder_content,picture_address,
         workorder_state,FK_student_number,create_time,
         update_time,deleted,version

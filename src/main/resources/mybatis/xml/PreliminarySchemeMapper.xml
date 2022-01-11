@@ -14,7 +14,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        FK_workorder_number,FK_job_number,preliminary_program,
+        FK_workorder_number
+        ,FK_job_number,preliminary_program,
         preliminar_time,create_time,update_time,
         deleted,version,FK_maintainer_account
     </sql>

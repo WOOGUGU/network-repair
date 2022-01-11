@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.repair.mapper.NoticeMapper">
 
+    <resultMap id="BaseResultMap" type="com.example.repair.entity.Notice">
+        <id property="noticeNumber" column="notice_number" jdbcType="INTEGER"/>
+        <result property="noticeContent" column="notice_content" jdbcType="CHAR"/>
+        <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
+        <result property="releaseTime" column="release_time" jdbcType="DATE"/>
+        <result property="fkJobNumber" column="FK_job_number" jdbcType="INTEGER"/>
+        <result property="deleted" column="deleted" jdbcType="TIMESTAMP"/>
+        <result property="version" column="version" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        notice_number,notice_content,notice_title,
+        release_time,FK_job_number,deleted,
+        version,create_time,update_time
+    </sql>
+
 </mapper>

@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.repair.mapper.MaintenanceRecordMapper">
 
+    <resultMap id="BaseResultMap" type="com.example.repair.entity.MaintenanceRecord">
+        <id property="fkWorkorderNumber" column="FK_workorder_number" jdbcType="INTEGER"/>
+        <result property="fkJobNumber" column="FK_job_number" jdbcType="INTEGER"/>
+        <result property="maintenanceRecord" column="maintenance_record" jdbcType="VARCHAR"/>
+        <result property="maintenanceTime" column="maintenance_time" jdbcType="DATE"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        FK_workorder_number,FK_job_number,maintenance_record,
+        maintenance_time,create_time,update_time,
+        version,deleted
+    </sql>
+
 </mapper>

@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.repair.mapper.MaintainerAccountMapper">
 
+    <resultMap id="BaseResultMap" type="com.example.repair.entity.MaintainerAccount">
+        <id property="jobNumber" column="job_number" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="passport" column="passport" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        job_number,name,passport,
+        create_time,update_time,deleted,
+        version
+    </sql>
+    <select id="selectJobNumberAndName" resultMap="BaseResultMap">
+        select job_number, name
+        from maintainer_account
+    </select>
 </mapper>

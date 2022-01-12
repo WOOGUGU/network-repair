@@ -7,7 +7,12 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" th:href="@{/user/logout}">注销</a>
+            <span   class="nav-link" th:inline="text">欢迎管理员:[[${#session.getAttribute('jobNumber')}]]  [[${#session.getAttribute('AdName')}]]</span>
+        </li>
+    </ul>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/viceadminister/logout}">注销</a>
         </li>
     </ul>
 </nav>

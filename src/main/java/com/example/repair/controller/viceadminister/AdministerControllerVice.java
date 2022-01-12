@@ -14,11 +14,14 @@ import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +51,7 @@ public class AdministerControllerVice {
         return "index";
     }
     @RequestMapping  ("/login/viceadminister")
-    public String login(Long jobnumber, String passport,Model model) {
+    public String login(Long jobnumber, String passport, Model model, HttpServletRequest request) {
 
         if (jobnumber == null || "".equals(passport)) {
             model.addAttribute("msg",ResultCode.getJson("0","用户名或密码为空"));
@@ -64,6 +67,8 @@ public class AdministerControllerVice {
             model.addAttribute("msg",ResultCode.getJson("0","用户名或密码错误"));
             return "forward:/vicead/welcome";
         } else {
+            request.getSession().setAttribute("jobNumber",jobnumber);
+            request.getSession().setAttribute("AdName",administratorAccount.getName());
             model.addAttribute("msg",ResultCode.getJson("1","登录成功！"));
             return "redirect:/viceadminister/maintainerList";
         }
@@ -85,27 +90,25 @@ public class AdministerControllerVice {
         return "orders/orderlist";
     }
 
-    @GetMapping("/viceadminister/pre-step1")
-    public String  preliminaryGetWorkOrder(Long workorderNumber,Model model) {
-        if (workorderNumber == null) {
-           model.addAttribute("msg",ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数"));
-        }
-        QueryWrapper<WorkorderInformation> queryWrapper=new QueryWrapper<>();
-        queryWrapper
-                .eq("workorder_number",workorderNumber);
-        WorkorderInformation workorderInformation=workorderInformationService.getOne(queryWrapper);
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
-        model.addAttribute("msg",ResultCode.getJson(workorderInformation));
-        model.addAttribute("maintainers",maintainerAccountList);
-        return "orders/update";
+    @GetMapping("/viceadminister/logout")
+    public String  AdministerLogout(HttpSession session) {
+        session.removeAttribute("AdName");
+        session.removeAttribute("jobNumber");
+        return "redirect:/vicead/welcome";
     }
+
+
+
     @RequestMapping("/viceadminister/preliminary")
     public String  submitPreliminary(Long workorderNumber,
                                      Long maintainer_number,
                                      String preliminary_porgram,
-                                     Model model) {
+                                     Model model,
+                                     HttpSession session) {
        PreliminaryScheme preliminaryScheme=new PreliminaryScheme();
-       preliminaryScheme.setFkJobNumber(1L);
+       if (session.getAttribute("jobnumber") == null ||session.getAttribute("AdName")==null )
+           return "redirect:/vicead/welcome";
+      else preliminaryScheme.setFkJobNumber((Long)session.getAttribute("jobnumber"));
        preliminaryScheme.setFkMaintainerAccount(maintainer_number);
        preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
        preliminaryScheme.setFkWorkorderNumber(workorderNumber);
@@ -119,5 +122,21 @@ public class AdministerControllerVice {
 
        return "redirect:/viceadminister/workorderList";
 
+    }
+
+
+    @GetMapping("/viceadminister/pre-step1")
+    public String  preliminaryGetWorkOrder(Long workorderNumber,Model model) {
+        if (workorderNumber == null) {
+            model.addAttribute("msg",ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数"));
+        }
+        QueryWrapper<WorkorderInformation> queryWrapper=new QueryWrapper<>();
+        queryWrapper
+                .eq("workorder_number",workorderNumber);
+        WorkorderInformation workorderInformation=workorderInformationService.getOne(queryWrapper);
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
+        model.addAttribute("msg",ResultCode.getJson(workorderInformation));
+        model.addAttribute("maintainers",maintainerAccountList);
+        return "orders/update";
     }
 }

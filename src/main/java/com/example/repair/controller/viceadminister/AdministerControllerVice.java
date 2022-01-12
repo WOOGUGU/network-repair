@@ -106,19 +106,26 @@ public class AdministerControllerVice {
                                      Model model,
                                      HttpSession session) {
        PreliminaryScheme preliminaryScheme=new PreliminaryScheme();
-       if (session.getAttribute("jobnumber") == null ||session.getAttribute("AdName")==null )
-           return "redirect:/vicead/welcome";
-      else preliminaryScheme.setFkJobNumber((Long)session.getAttribute("jobnumber"));
-       preliminaryScheme.setFkMaintainerAccount(maintainer_number);
-       preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
-       preliminaryScheme.setFkWorkorderNumber(workorderNumber);
-       preliminarySchemeService.save(preliminaryScheme);
-       QueryWrapper<WorkorderInformation> queryWrapper=new QueryWrapper<>();
-       queryWrapper
-                .eq("workorder_number",workorderNumber);
-       WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
-       workorderInformation.setWorkorderState("2");
-        workorderInformationService.updateById(workorderInformation);
+
+       try {
+    preliminaryScheme.setFkJobNumber((Long)session.getAttribute("jobNumber"));
+           preliminaryScheme.setFkMaintainerAccount(maintainer_number);
+           preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
+           preliminaryScheme.setFkWorkorderNumber(workorderNumber);
+           preliminarySchemeService.save(preliminaryScheme);
+           QueryWrapper<WorkorderInformation> queryWrapper=new QueryWrapper<>();
+           queryWrapper
+                   .eq("workorder_number",workorderNumber);
+           WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
+           workorderInformation.setWorkorderState("2");
+           workorderInformationService.updateById(workorderInformation);
+
+}catch (Exception e) {
+
+        model.addAttribute("msg",ResultCode.Fail("请先登录"));
+        return "forward:/vicead/welcome";
+    }
+
 
        return "redirect:/viceadminister/workorderList";
 

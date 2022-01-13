@@ -78,6 +78,15 @@ public class AdministerControllerVice {
         model.addAttribute("msg", ResultCode.getJson(maintainerAccountList));
         return "emp/maintainerlist";
     }
+    @GetMapping("/viceadminister/delmaintainer")
+    public String deleteMatainer(Long jobNumber,Model model) {
+        if (jobNumber == null) {
+            model.addAttribute("msg", ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数"));
+        }
+        maintainerAccountService.removeById(jobNumber);
+        return "redirect:/viceadminister/maintainerList";
+    }
+
 
     @GetMapping("/viceadminister/workorderList")
     public String workorderList(Model model) {
@@ -124,6 +133,7 @@ public class AdministerControllerVice {
     }
 
 
+
     @GetMapping("/viceadminister/getorder")
     public String preliminaryGetWorkOrder(Long workorderNumber, Model model) {
         if (workorderNumber == null) {
@@ -139,3 +149,4 @@ public class AdministerControllerVice {
         return "orders/update";
     }
 }
+

@@ -11,7 +11,7 @@ public class interceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")//添加要拦截哪些
-                .excludePathPatterns("/login/viceadminister", "/", "login", "/css/**", "/img/**", "/js/**");
+                .addPathPatterns("controller/viceadminister/**")//添加要拦截哪些
+                .excludePathPatterns("/login/viceadminister", "/", "login", "/css/**", "/img/**", "/js/**","");
     }
 }

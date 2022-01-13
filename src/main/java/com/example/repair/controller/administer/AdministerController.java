@@ -48,7 +48,7 @@ public class AdministerController {
     @GetMapping("/administer/getorder")
     public Object getOrder(Long workorder_number) {
         if (workorder_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
@@ -73,7 +73,7 @@ public class AdministerController {
             Long maintainer_number
     ) {
         if (workorder_number == null || administrator_number == null || maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "0","缺少必要参数");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
 
         PreliminaryScheme preliminaryScheme = new PreliminaryScheme();

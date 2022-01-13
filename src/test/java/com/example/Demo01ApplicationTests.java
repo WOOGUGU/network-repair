@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.repair.entity.AdministratorAccount;
+import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.mapper.MaintainerAccountMapper;
 import com.example.repair.service.AdministratorAccountService;
 import com.example.repair.service.impl.MaintainerAccountServiceImpl;
@@ -58,7 +59,8 @@ class Demo01ApplicationTests {
         administratorAccountService.updateBatchById(administratorAccountList);
 
     }
-//    @Test
+
+    //    @Test
 //    void LockTest() {
 //        AdministratorAccount administratorAccount=new AdministratorAccount();
 //        AdministratorAccount administratorAccount1=new AdministratorAccount();
@@ -72,6 +74,11 @@ class Demo01ApplicationTests {
 //        administratorAccountMapper.updateById(administratorAccount);
 //
 //    }
+    @Test
+    public void Datashow() {
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
+        maintainerAccountList.forEach(System.out::println);
+    }
 
 
 }

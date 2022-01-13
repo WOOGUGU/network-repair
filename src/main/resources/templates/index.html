@@ -20,7 +20,8 @@
     <p th:text="${msg.message}" style="color: red" th:if="${not #strings.isEmpty(msg)}"></p>
 
     <label class="sr-only" th:text="${login.username}">Username</label>
-    <input type="text" name="jobnumber" class="form-control" th:placeholder="${login.username}" required="" autofocus="">
+    <input type="text" name="jobnumber" class="form-control" th:placeholder="${login.username}" required=""
+           autofocus="">
     <label class="sr-only" th:text="${login.password}">Password</label>
     <input type="password" name="passport" class="form-control" th:placeholder="${login.password}" required="">
     <div class="checkbox mb-3">

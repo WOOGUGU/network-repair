@@ -63,6 +63,7 @@
                         <th>联系方式</th>
                         <th>地址</th>
                         <th>内容描述</th>
+                        <th>维修时间</th>
                         <th>工单状态</th>
                         <!--                        <th>department</th>-->
                         <!--                        <th>birth</th>-->
@@ -81,8 +82,10 @@
                         <!--                        <td th:text="${emp.getDepartment().getDepartmentName()}"></td>-->
                         <!--                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"></td>-->
                         <td>
-                            <a class="btn btn-sm btn-primary" th:href="@{/viceadminister/pre-step1(workorderNumber=${order.workorderNumber})}">编辑</a>
-                            <a class="btn btn-sm btn-danger" th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{/viceadminister/getorder(workorderNumber=${order.workorderNumber})}">编辑</a>
+                            <a class="btn btn-sm btn-danger"
+                               th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>
                         </td>
 
                     </tr>

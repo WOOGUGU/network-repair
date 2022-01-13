@@ -20,7 +20,7 @@ public class myConfig {
     // 分页插件
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-        return  new PaginationInterceptor();
+        return new PaginationInterceptor();
     }
 
     // 逻辑删除组件！

@@ -14,13 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class QiniuUtils {
 
-    public static  final String url = "r5hpwa7fv.hb-bkt.clouddn.com";
+    public static final String url = "r5hpwa7fv.hb-bkt.clouddn.com";
     @Value("OmUzLXYLWKvEadiRl9PxOvWW4J_qTa0WOLx0oFKo")
-    private  String accessKey;
+    private String accessKey;
     @Value("SzrqFsOD81WN-2flzF_T9n-Qq2x_p5JSXXXzvqX3")
-    private  String accessSecretKey;
+    private String accessSecretKey;
 
-    public  boolean upload(MultipartFile file,String fileName){
+    public boolean upload(MultipartFile file, String fileName) {
 
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.huabei());

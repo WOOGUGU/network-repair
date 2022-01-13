@@ -93,11 +93,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">部门</label>
                     <div class="col-sm-10">
-                                                <select class="form-control" name="department">
-                                                    <option th:selected="${employee.getDepartment()==dept.getDid()}"
-                                                            th:each="dept:${departments}" th:text="${dept.getDepartmentName()}"
-                                                            th:value="${dept.getDid()}"></option>
-                                                </select>
+                        <select class="form-control" name="department">
+                            <option th:selected="${employee.getDepartment()==dept.getDid()}"
+                                    th:each="dept:${departments}" th:text="${dept.getDepartmentName()}"
+                                    th:value="${dept.getDid()}"></option>
+                        </select>
                     </div>
 
                 </div>

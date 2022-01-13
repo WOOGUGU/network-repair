@@ -1,7 +1,7 @@
 package com.example.repair.service;
 
-import com.example.repair.entity.StudentAccount;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.repair.entity.StudentAccount;
 
 /**
  * <p>

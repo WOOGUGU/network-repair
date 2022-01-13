@@ -21,6 +21,7 @@ import java.util.List;
 public class MaintainerAccountServiceImpl extends ServiceImpl<MaintainerAccountMapper, MaintainerAccount> implements MaintainerAccountService {
     @Autowired
     MaintainerAccountMapper maintainerAccountMapper;
+
     @Override
     public List<MaintainerAccount> getJobNumberAndNameList() {
         return maintainerAccountMapper.selectJobNumberAndName();

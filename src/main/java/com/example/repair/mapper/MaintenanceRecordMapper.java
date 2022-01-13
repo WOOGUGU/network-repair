@@ -1,7 +1,7 @@
 package com.example.repair.mapper;
 
-import com.example.repair.entity.MaintenanceRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.repair.entity.MaintenanceRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

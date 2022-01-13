@@ -1,8 +1,10 @@
+server:
+  port: 9999
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://cn-zz-bgp-5.natfrp.cloud:11831/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-#    url: jdbc:mysql://localhost:3306/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #    url: jdbc:mysql://localhost:3306/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: Root_12root
   thymeleaf:

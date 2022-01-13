@@ -1,14 +1,14 @@
 package com.example.repair.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.mapper.AdministratorAccountMapper;
 import com.example.repair.service.AdministratorAccountService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author ZBWKHH

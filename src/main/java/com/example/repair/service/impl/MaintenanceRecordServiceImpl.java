@@ -1,9 +1,9 @@
 package com.example.repair.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.repair.entity.MaintenanceRecord;
 import com.example.repair.mapper.MaintenanceRecordMapper;
 import com.example.repair.service.MaintenanceRecordService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

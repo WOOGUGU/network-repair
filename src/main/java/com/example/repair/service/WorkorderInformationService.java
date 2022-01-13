@@ -1,11 +1,11 @@
 package com.example.repair.service;
 
-import com.example.repair.entity.WorkorderInformation;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.repair.entity.WorkorderInformation;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author ZBWKHH

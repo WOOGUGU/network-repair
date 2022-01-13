@@ -16,7 +16,8 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        job_number,name,passport
+        job_number
+        ,name,passport
         create_time,update_time,deleted,
         version
     </sql>

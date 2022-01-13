@@ -11,7 +11,9 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+
 import java.util.ArrayList;
+
 public class autocreate {
     public static void main(String[] args) {
 // 需要构建一个 代码自动生成器 对象
@@ -19,7 +21,7 @@ public class autocreate {
 // 1、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");//当前项目路径
-        gc.setOutputDir(projectPath+"/src/main/java");
+        gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("ZBWKHH");
         gc.setOpen(false);
         gc.setFileOverride(false); // 是否覆盖
@@ -47,8 +49,8 @@ public class autocreate {
         mpg.setPackageInfo(pc);
         //4、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("administrator_account","maintainer_account","maintenance_record","notice",
-                "preliminary_scheme","student_account","workorder_information"); // 设置要映射的表名
+        strategy.setInclude("administrator_account", "maintainer_account", "maintenance_record", "notice",
+                "preliminary_scheme", "student_account", "workorder_information"); // 设置要映射的表名
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);// 自动lombok；
@@ -56,7 +58,8 @@ public class autocreate {
         // 自动填充配置
         TableFill gmtCreate = new TableFill("create_time", FieldFill.INSERT);
         TableFill gmtModified = new TableFill("update_time", FieldFill.INSERT_UPDATE);
-        ArrayList<TableFill> tableFills = new ArrayList<>(); tableFills.add(gmtCreate);
+        ArrayList<TableFill> tableFills = new ArrayList<>();
+        tableFills.add(gmtCreate);
         tableFills.add(gmtModified);
         strategy.setTableFillList(tableFills);
         // 乐观锁

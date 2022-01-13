@@ -23,6 +23,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
@@ -39,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.7.0, 7.7.99]</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.0.5</version>
@@ -49,11 +60,12 @@
             <version>1.7</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.github.hc621311/springboot-swagger3-starter -->        <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger2</artifactId>
-        <version>2.9.2</version>
-    </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.hc621311/springboot-swagger3-starter -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -85,7 +97,13 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!--optional=true 依赖不会传递，该项目依赖devtools
+            之后依赖该项目的项目如果想要使用devtools，需要重新导入-->
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 

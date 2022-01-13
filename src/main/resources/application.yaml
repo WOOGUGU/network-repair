@@ -4,6 +4,13 @@ spring:
     url: jdbc:mysql://cn-zz-bgp-5.natfrp.cloud:11831/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: Root_12root
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  servlet:
+    multipart:
+      enabled: true
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -11,4 +18,9 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
-  mapper-locations: classpath:com/mybatis/*:xml
+  mapper-locations: classpath:mybatis/mapper/*:xml
+
+
+
+
+

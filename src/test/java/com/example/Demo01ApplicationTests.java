@@ -33,7 +33,8 @@ class Demo01ApplicationTests {
 
     @Test
     void contextLoads() {
-        maintainerAccountService.getJobNumberAndNameList();
+        String path = System.getProperty("user.dir");
+        System.out.println(path);
     }
 
     @Test

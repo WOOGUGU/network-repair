@@ -9,12 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-project08-mybatis-plus</artifactId>
+    <artifactId>network-repair</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-project08-mybatis-plus</name>
-    <description>SpringBoot-project08-mybatis-plus</description>
+    <name>network-repair</name>
+    <description>network-repair</description>
     <properties>
         <java.version>1.8</java.version>
+        <!-- 跳过测试 -->
+        <skipTests>true</skipTests>
     </properties>
     <dependencies>
         <dependency>

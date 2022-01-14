@@ -2,14 +2,8 @@ package com.example.repair.controller.viceadminister;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.repair.entity.AdministratorAccount;
-import com.example.repair.entity.MaintainerAccount;
-import com.example.repair.entity.PreliminaryScheme;
-import com.example.repair.entity.WorkorderInformation;
-import com.example.repair.service.impl.AdministratorAccountServiceImpl;
-import com.example.repair.service.impl.MaintainerAccountServiceImpl;
-import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
-import com.example.repair.service.impl.WorkorderInformationServiceImpl;
+import com.example.repair.entity.*;
+import com.example.repair.service.impl.*;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +28,12 @@ public class AdministerControllerVice {
     MaintainerAccountServiceImpl maintainerAccountService;
     @Autowired
     AdministratorAccountServiceImpl administratorAccountService;
-
+    @Autowired
+    NoticeServiceImpl noticeService;
     @RequestMapping({"/", "/vicead/welcome"})
     public String Index(Model model) {
         Map<String, String> map = new HashMap<String, String>();
-
+    //进入登陆页面
         map.put("tip", "首页");
         map.put("username", "username");
         map.put("password", "password");
@@ -47,18 +42,25 @@ public class AdministerControllerVice {
         model.addAttribute("login", map);
         return "index";
     }
-
+    //收到登录请求，如果登录成功，跳转到员工列表页
     @RequestMapping("/login/viceadminister")
-    public String login(Long jobnumber, String passport, Model model, HttpServletRequest request) {
-
+    public String login(String jobnumber, String passport, Model model, HttpServletRequest request) {
         if (jobnumber == null || "".equals(passport)) {
             model.addAttribute("msg", ResultCode.getJson("0", "用户名或密码为空"));
-            return "forword:/vicead/welcome";
+            return "forward:/";
+        }
+        Long jobNumber;
+        try {
+            jobNumber = Long.parseLong(jobnumber);
+        }
+        catch (NumberFormatException e){
+            model.addAttribute("msg", ResultCode.getJson("0", "用户名或密码错误，请输入数字账号！"));
+            return "forward:/";
         }
 
         QueryWrapper<AdministratorAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper
-                .eq("job_number", jobnumber)
+                .eq("job_number", jobNumber)
                 .eq("passport", passport);
         AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
         if (administratorAccount == null) {
@@ -72,12 +74,16 @@ public class AdministerControllerVice {
         }
     }
 
+
+    //员工页（维修工页面）
     @GetMapping("/viceadminister/maintainerList")
     public String maintainerList(Model model) {
         List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
         model.addAttribute("msg", ResultCode.getJson(maintainerAccountList));
         return "emp/maintainerlist";
     }
+
+    //删除维修工
     @GetMapping("/viceadminister/delmaintainer")
     public String deleteMatainer(Long jobNumber,Model model) {
         if (jobNumber == null) {
@@ -88,6 +94,7 @@ public class AdministerControllerVice {
     }
 
 
+    //获得所有工单并跳转到相应页面
     @GetMapping("/viceadminister/workorderList")
     public String workorderList(Model model) {
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper();
@@ -96,7 +103,7 @@ public class AdministerControllerVice {
         model.addAttribute("msg", ResultCode.getJson(workorderInformationList));
         return "orders/orderlist";
     }
-
+    //注销功能
     @GetMapping("/viceadminister/logout")
     public String AdministerLogout(HttpSession session) {
         session.removeAttribute("AdName");
@@ -104,7 +111,7 @@ public class AdministerControllerVice {
         return "redirect:/vicead/welcome";
     }
 
-
+    //预处理
     @RequestMapping("/viceadminister/preliminary")
     public String submitPreliminary(Long workorderNumber,
                                     Long maintainer_number,
@@ -133,7 +140,7 @@ public class AdministerControllerVice {
     }
 
 
-
+    //获得某工单
     @GetMapping("/viceadminister/getorder")
     public String preliminaryGetWorkOrder(Long workorderNumber, Model model) {
         if (workorderNumber == null) {
@@ -147,6 +154,13 @@ public class AdministerControllerVice {
         model.addAttribute("msg", ResultCode.getJson(workorderInformation));
         model.addAttribute("maintainers", maintainerAccountList);
         return "orders/update";
+    }
+    @RequestMapping("/viceadminister/noticeList")
+    public String getNoticeList(Model model){
+        List<Notice> noticeList=noticeService.list(null) ;
+        model.addAttribute("msg", ResultCode.getJson(noticeList));
+        return "notice/noticelist";
+
     }
 }
 

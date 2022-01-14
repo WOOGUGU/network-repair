@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,34 +31,12 @@ class Demo01ApplicationTests {
 
     @Test
     void insertTest() {
-        AdministratorAccount administratorAccount = new AdministratorAccount();
-        administratorAccount.setJobNumber(9L);
-        administratorAccount.setName("user8");
-        administratorAccount.setPassport("password");
-        administratorAccountService.save(administratorAccount);
 
     }
 
     @Test
     void updateTest() {
-        List<AdministratorAccount> administratorAccountList = new ArrayList<>();
-        AdministratorAccount administratorAccount = new AdministratorAccount();
-        AdministratorAccount administratorAccount1 = new AdministratorAccount();
 
-        administratorAccount.setJobNumber(9L);
-        administratorAccount.setName("ad08");
-        administratorAccount.setPassport("123456");
-
-        administratorAccount1.setJobNumber(10L);
-        administratorAccount1.setName("ad04");
-        administratorAccount1.setPassport("123456");
-
-
-        administratorAccountList.add(administratorAccount);
-        administratorAccountList.add(administratorAccount1);
-
-
-        administratorAccountService.updateBatchById(administratorAccountList);
 
     }
 
@@ -79,6 +59,17 @@ class Demo01ApplicationTests {
         List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
         maintainerAccountList.forEach(System.out::println);
     }
+    @Test
+    public  void getWeekOfDate() {
 
+        Date date = new Date();
+        String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        System.out.println(w);
+    }
 
 }

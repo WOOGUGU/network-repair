@@ -29,7 +29,7 @@ public class studentController {
 
     // 学生提交评价
     @PostMapping("/student/evaluate")
-    public Object submitorder(
+    public Object evaluate(
             Long student_number,
             Long workorder_number,
             float maintenance_satisfaction,

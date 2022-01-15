@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -28,7 +29,7 @@ public class WorkorderInformation implements Serializable {
     private Long workorderNumber;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date initiationTime;
+    private Timestamp initiationTime;
 
     private String contactInformation;
 

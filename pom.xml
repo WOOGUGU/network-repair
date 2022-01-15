@@ -8,10 +8,13 @@
         <version>2.6.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <!-- 打包配置 -->
     <groupId>com.example</groupId>
     <artifactId>network-repair</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>network-repair</name>
+    <packaging>jar</packaging>
+
     <description>network-repair</description>
     <properties>
         <java.version>1.8</java.version>

@@ -1,8 +1,6 @@
 package com.example.repair.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,7 +19,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "WorkorderInformation对象", description = "")
+
 public class WorkorderInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,7 +46,6 @@ public class WorkorderInformation implements Serializable {
 
     private String evaluation;
 
-    @ApiModelProperty(value = "1：待预处理；2：待维修；3：工单完成")
     private String workorderState;
 
     @TableField("FK_student_number")

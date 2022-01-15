@@ -1,7 +1,6 @@
 package com.example.repair.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,7 +19,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "StudentAccount对象", description = "学生账户表")
+
 public class StudentAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;

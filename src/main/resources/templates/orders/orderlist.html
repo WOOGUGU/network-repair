@@ -54,7 +54,7 @@
         <div th:replace="~{commons/commons::sidebar(active='list.html')}"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2><a class="btn btn-sm btn-success" th:href="@{/interadd}">添加员工</a></h2>
+<!--            <h2><a class="btn btn-sm btn-success" th:href="@{/interadd}">添加员工</a></h2>-->
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -63,8 +63,9 @@
                         <th>联系方式</th>
                         <th>地址</th>
                         <th>内容描述</th>
-                        <th>维修时间</th>
+                        <th>申请时间</th>
                         <th>工单状态</th>
+                        <th>上传时间</th>
                         <!--                        <th>department</th>-->
                         <!--                        <th>birth</th>-->
                     </tr>
@@ -79,13 +80,14 @@
                         <td th:text="${order.workorderContent}"></td>
                         <td th:text="${order.fixedTime}"></td>
                         <td th:text="${order.workorderState}"></td>
+                        <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                         <!--                        <td th:text="${emp.getDepartment().getDepartmentName()}"></td>-->
                         <!--                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"></td>-->
                         <td>
                             <a class="btn btn-sm btn-primary"
-                               th:href="@{/viceadminister/getorder(workorderNumber=${order.workorderNumber})}">编辑</a>
-                            <a class="btn btn-sm btn-danger"
-                               th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>
+                               th:href="@{/viceadminister/getorder(workorderNumber=${order.workorderNumber})}">查看</a>
+<!--                            <a class="btn btn-sm btn-danger"-->
+<!--                               th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>-->
                         </td>
 
                     </tr>

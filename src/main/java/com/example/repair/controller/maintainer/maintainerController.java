@@ -60,6 +60,18 @@ public class maintainerController {
         maintenanceRecord.setMaintenanceRecord(maintenance_record);
         maintenanceRecord.setFkJobNumber(maintainer_number);
         if (maintenanceRecordService.save(maintenanceRecord)) {
+            QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
+            queryWrapper
+                    .eq("workorder_number", workorder_number)
+                    .eq("workorder_state","2");
+            WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
+            workorderInformation.setWorkorderState("3");
+            workorderInformationService.updateById(workorderInformation);
+            if (workorderInformation == null){
+
+                ResultCode.getJson("该订单还未预处理");
+            }
+
             return ResultCode.getJson("1");
         } else {
             return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");

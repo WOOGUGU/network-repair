@@ -80,14 +80,14 @@
                         <td th:text="${order.workorderContent}"></td>
                         <td th:text="${order.fixedTime}"></td>
                         <td th:text="${order.workorderState}"></td>
-                        <td th:text="${order.createTime}"></td>
+                        <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                         <!--                        <td th:text="${emp.getDepartment().getDepartmentName()}"></td>-->
                         <!--                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"></td>-->
                         <td>
                             <a class="btn btn-sm btn-primary"
                                th:href="@{/viceadminister/getorder(workorderNumber=${order.workorderNumber})}">查看</a>
-                            <a class="btn btn-sm btn-danger"
-                               th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>
+<!--                            <a class="btn btn-sm btn-danger"-->
+<!--                               th:href="@{/deluser(workorderNumber=${order.workorderNumber})}">删除</a>-->
                         </td>
 
                     </tr>

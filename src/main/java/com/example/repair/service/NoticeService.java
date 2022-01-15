@@ -12,5 +12,5 @@ import com.example.repair.entity.Notice;
  * @since 2022-01-07
  */
 public interface NoticeService extends IService<Notice> {
-
+        public Notice getNewestNotice();
 }

@@ -1,6 +1,7 @@
 package com.example.repair.controller.viceadminister;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.repair.entity.*;
 import com.example.repair.service.impl.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,8 @@ public class AdministerControllerVice {
     NoticeServiceImpl noticeService;
     @RequestMapping({"/", "/vicead/welcome"})
     public String Index(Model model) {
+
+    //-------------------------------------------------登录--------------------------------------------------
         Map<String, String> map = new HashMap<String, String>();
     //进入登陆页面
         map.put("tip", "首页");
@@ -74,7 +78,15 @@ public class AdministerControllerVice {
         }
     }
 
+    //注销功能
+    @GetMapping("/viceadminister/logout")
+    public String AdministerLogout(HttpSession session) {
+        session.removeAttribute("AdName");
+        session.removeAttribute("jobNumber");
+        return "redirect:/vicead/welcome";
+    }
 
+    //-------------------------------------------------维修工--------------------------------------------------
     //员工页（维修工页面）
     @GetMapping("/viceadminister/maintainerList")
     public String maintainerList(Model model) {
@@ -93,6 +105,7 @@ public class AdministerControllerVice {
         return "redirect:/viceadminister/maintainerList";
     }
 
+    // -------------------------------------------------工单---------------------------------------------------
 
     //获得所有工单并跳转到相应页面
     @GetMapping("/viceadminister/workorderList")
@@ -103,13 +116,7 @@ public class AdministerControllerVice {
         model.addAttribute("msg", ResultCode.getJson(workorderInformationList));
         return "orders/orderlist";
     }
-    //注销功能
-    @GetMapping("/viceadminister/logout")
-    public String AdministerLogout(HttpSession session) {
-        session.removeAttribute("AdName");
-        session.removeAttribute("jobNumber");
-        return "redirect:/vicead/welcome";
-    }
+
 
     //预处理
     @RequestMapping("/viceadminister/preliminary")
@@ -118,8 +125,10 @@ public class AdministerControllerVice {
                                     String preliminary_porgram,
                                     Model model,
                                     HttpSession session) {
+
+        Long jobNumber = Long.parseLong(String.valueOf(session.getAttribute("jobNumber")));
         PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
-        preliminaryScheme.setFkJobNumber((Long) session.getAttribute("jobNumber"));
+        preliminaryScheme.setFkJobNumber(jobNumber);
         preliminaryScheme.setFkMaintainerAccount(maintainer_number);
         preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
         preliminaryScheme.setFkWorkorderNumber(workorderNumber);
@@ -155,11 +164,40 @@ public class AdministerControllerVice {
         model.addAttribute("maintainers", maintainerAccountList);
         return "orders/update";
     }
+
+    // -------------------------------------------------公告---------------------------------------------------
     @RequestMapping("/viceadminister/noticeList")
     public String getNoticeList(Model model){
         List<Notice> noticeList=noticeService.list(null) ;
         model.addAttribute("msg", ResultCode.getJson(noticeList));
         return "notice/noticelist";
+
+    }
+    @RequestMapping("/viceadminister/goaddnotice")
+    public String goaddNotice(Long noticeNumber,Model model){
+        return "notice/add";
+
+    }
+
+
+    @RequestMapping("/viceadminister/addnotice")
+    public String addNotice(Long jobNumber,
+                            String noticeContent,
+                            String noticeTitle,
+                            Model model)
+    {
+        Notice notice = new Notice();
+        notice.setNoticeTitle(noticeTitle);
+        notice.setNoticeContent(noticeContent);
+        notice.setFkJobNumber(jobNumber);
+        if (noticeService.save(notice)){
+            model.addAttribute("msg",ResultCode.getJson("1","上传成功"));
+            return "redirect:/viceadminister/noticeList";
+        }
+        else {
+            model.addAttribute("msg",ResultCode.getJson("0","上传失败"));
+            return "redirect:/viceadminister/noticeList";
+        }
 
     }
 }

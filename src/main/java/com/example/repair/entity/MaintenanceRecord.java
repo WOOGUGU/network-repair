@@ -2,7 +2,6 @@ package com.example.repair.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.example.repair.util.CalendarUtils;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -22,7 +21,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "MaintenanceRecord对象", description = "维修记录")
 public class MaintenanceRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,19 +49,5 @@ public class MaintenanceRecord implements Serializable {
     private Integer deleted;
 
 
-    public String getCreateTime() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return simpleDateFormat.format(createTime)+"\t"+ CalendarUtils.datOfWeek(createTime);
-    }
-
-    public String getUpdateTime() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(updateTime)+"\t"+CalendarUtils.datOfWeek(updateTime);
-    }
-
-    public String getMaintenanceTime() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(maintenanceTime)+"\t"+CalendarUtils.datOfWeek(maintenanceTime);
-    }
 }

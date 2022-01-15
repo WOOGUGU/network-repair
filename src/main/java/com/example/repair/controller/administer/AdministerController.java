@@ -82,6 +82,14 @@ public class AdministerController {
         preliminaryScheme.setFkJobNumber(administrator_number);
         preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
         if (preliminarySchemeService.save(preliminaryScheme)) {
+
+            QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
+            queryWrapper
+                    .eq("workorder_number", workorder_number);
+            WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
+            workorderInformation.setWorkorderState("2");
+            workorderInformationService.updateById(workorderInformation);
+
             return ResultCode.getJson("1");
         } else {
             return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");

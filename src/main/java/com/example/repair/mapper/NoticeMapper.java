@@ -1,8 +1,12 @@
 package com.example.repair.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.Notice;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface NoticeMapper extends BaseMapper<Notice> {
-
+    //获得最近发布的公告
+    @Select("SELECT * FROM notice WHERE release_time = (SELECT MAX(release_time)  FROM notice)")
+    Notice  newestNotice();
 }

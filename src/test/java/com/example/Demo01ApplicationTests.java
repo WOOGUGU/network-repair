@@ -1,10 +1,15 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.entity.MaintainerAccount;
+import com.example.repair.entity.Notice;
 import com.example.repair.mapper.MaintainerAccountMapper;
 import com.example.repair.service.AdministratorAccountService;
 import com.example.repair.service.impl.MaintainerAccountServiceImpl;
+import com.example.repair.service.impl.NoticeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +28,8 @@ class Demo01ApplicationTests {
     MaintainerAccountServiceImpl maintainerAccountService;
     @Autowired
     MaintainerAccountMapper maintainerAccountMapper;
+    @Autowired
+    NoticeServiceImpl noticeService;
 
     @Test
     void contextLoads() {
@@ -71,5 +78,18 @@ class Demo01ApplicationTests {
             w = 0;
         System.out.println(w);
     }
+    @Test
+    public void  noticeTest(){
+        System.out.println(noticeService.getNewestNotice());
+
+    }
+    @Test
+    public void JsonTest(){
+        Notice notice=noticeService.getById(1L);
+        JSONObject jsonObject=JSONObject.parseObject(JSON.toJSONString(notice));
+//        jsonObject.put("release_time")
+
+    }
+
 
 }

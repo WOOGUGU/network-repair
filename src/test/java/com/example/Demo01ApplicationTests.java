@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.Notice;
+import com.example.repair.entity.WorkorderInformation;
 import com.example.repair.mapper.MaintainerAccountMapper;
+import com.example.repair.mapper.WorkorderInformationMapper;
 import com.example.repair.service.AdministratorAccountService;
 import com.example.repair.service.impl.MaintainerAccountServiceImpl;
 import com.example.repair.service.impl.NoticeServiceImpl;
@@ -30,11 +32,13 @@ class Demo01ApplicationTests {
     MaintainerAccountMapper maintainerAccountMapper;
     @Autowired
     NoticeServiceImpl noticeService;
+    @Autowired
+    WorkorderInformationMapper workorderInformationMapper;
 
     @Test
     void contextLoads() {
-        String path = System.getProperty("user.dir");
-        System.out.println(path);
+        WorkorderInformation ans = workorderInformationMapper.getByFkStudentNumberAndMaxInitiationTime(1911111111L);
+        System.out.println(ans);
     }
 
     @Test

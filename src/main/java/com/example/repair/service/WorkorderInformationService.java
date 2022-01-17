@@ -12,5 +12,5 @@ import com.example.repair.entity.WorkorderInformation;
  * @since 2022-01-07
  */
 public interface WorkorderInformationService extends IService<WorkorderInformation> {
-
+    WorkorderInformation getlatestorder(Long studentNumber);
 }

@@ -11,7 +11,9 @@ import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
 import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -108,7 +110,7 @@ public class AdministerController {
             String passport
     ) {
         if (job_number == null || "".equals(passport) || "".equals(name)) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
 
         MaintainerAccount maintainerAccount = new MaintainerAccount();
@@ -123,6 +125,33 @@ public class AdministerController {
         }
     }
 
+    // 管理员删除维修员
+    @DeleteMapping("/administer/deletemaintainer")
+    public Object deletemaintainer(
+            Long administer_number,
+            String passport,
+            Long maintainer_number
+    ){
+        if (administer_number == null || "".equals(passport) || maintainer_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
+        }
+
+        QueryWrapper<AdministratorAccount> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("job_number", administer_number)
+                .eq("passport", passport);
+        AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
+        if (administratorAccount == null) {
+            return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "管理员认证失败");
+        }else {
+            if(maintainerAccountService.removeById(maintainer_number)){
+                return ResultCode.getJson("1","成功移除维修员："+maintainer_number);
+            }else{
+                return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "移除失败");
+            }
+        }
+
+    }
     // 登入
     @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {

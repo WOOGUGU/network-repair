@@ -96,6 +96,29 @@ public class AdministerController {
         }
     }
 
+    // 管理员添加维修员
+    @PostMapping("/administer/addmaintainer")
+    public Object addmaintainer(
+            Long job_number,
+            String name,
+            String passport
+    ) {
+        if (job_number == null || "".equals(passport) || "".equals(name)) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
+        }
+
+        MaintainerAccount maintainerAccount = new MaintainerAccount();
+        maintainerAccount.setJobNumber(job_number);
+        maintainerAccount.setName(name);
+        maintainerAccount.setPassport(passport);
+
+        if (maintainerAccountService.save(maintainerAccount)) {
+            return ResultCode.getJson("1");
+        } else {
+            return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
+        }
+    }
+
     // 登入
     @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {

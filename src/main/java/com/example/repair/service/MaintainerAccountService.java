@@ -14,5 +14,5 @@ import java.util.List;
  * @since 2022-01-07
  */
 public interface MaintainerAccountService extends IService<MaintainerAccount> {
-    List<MaintainerAccount> getJobNumberAndNameList();
+    List<MaintainerAccount> maintainerlist();
 }

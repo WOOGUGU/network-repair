@@ -60,7 +60,7 @@ public class AdministerController {
     // 管理员获得全部维修人员基本信息
     @GetMapping("/administer/maintainerlist")
     public Object maintainerList() {
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.maintainerlist();
         return ResultCode.getJson(maintainerAccountList);
     }
 

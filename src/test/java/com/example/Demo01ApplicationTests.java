@@ -2,8 +2,6 @@ package com.example;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.repair.entity.AdministratorAccount;
 import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.Notice;
 import com.example.repair.mapper.MaintainerAccountMapper;
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,11 +64,12 @@ class Demo01ApplicationTests {
         List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(null);
         maintainerAccountList.forEach(System.out::println);
     }
+
     @Test
-    public  void getWeekOfDate() {
+    public void getWeekOfDate() {
 
         Date date = new Date();
-        String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
@@ -79,15 +77,16 @@ class Demo01ApplicationTests {
             w = 0;
         System.out.println(w);
     }
-    @Test
-    public void  noticeTest(){
-        System.out.println(noticeService.getNewestNotice());
 
-    }
     @Test
-    public void JsonTest(){
-        Notice notice=noticeService.getById(1L);
-        JSONObject jsonObject=JSONObject.parseObject(JSON.toJSONString(notice));
+    public void noticeTest() {
+        System.out.println(noticeService.getNewestNotice());
+    }
+
+    @Test
+    public void JsonTest() {
+        Notice notice = noticeService.getById(1L);
+        JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(notice));
 //        jsonObject.put("release_time")
 
     }

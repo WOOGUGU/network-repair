@@ -92,7 +92,8 @@ public class studentController {
         }
 
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("FK_student_number", student_number);
+        queryWrapper.eq("FK_student_number", student_number)
+                .orderByDesc("initiation_time");
         List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
         return ResultCode.getJson(workorderInformationList);
     }

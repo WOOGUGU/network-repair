@@ -84,6 +84,15 @@ public class studentController {
         }
     }
 
+    // 学生获得最近的工单
+    @GetMapping("/student/getlatestorder")
+    public Object getlastorder(Long student_number) {
+        if (student_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
+        }
+        return ResultCode.getJson(workorderInformationService.getlatestorder(student_number));
+    }
+
     // 学生查看工单列表
     @GetMapping("/student/orderlist")
     public Object orderList(Long student_number) {

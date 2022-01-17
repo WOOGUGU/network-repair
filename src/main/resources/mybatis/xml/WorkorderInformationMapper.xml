@@ -24,5 +24,16 @@
         workorder_state,FK_student_number,create_time,
         update_time,deleted,version
     </sql>
+    <select id="getByFkStudentNumberAndMaxInitiationTime" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from workorder_information
+        where
+        FK_student_number=#{fkStudentNumber}
+        order by
+        initiation_time desc
+        limit
+        1
+    </select>
 
 </mapper>

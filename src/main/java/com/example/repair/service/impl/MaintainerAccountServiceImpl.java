@@ -24,6 +24,6 @@ public class MaintainerAccountServiceImpl extends ServiceImpl<MaintainerAccountM
 
     @Override
     public List<MaintainerAccount> maintainerlist() {
-        return maintainerAccountMapper.selectJobNumberAndName();
+        return maintainerAccountMapper.selectBasicInformation();
     }
 }

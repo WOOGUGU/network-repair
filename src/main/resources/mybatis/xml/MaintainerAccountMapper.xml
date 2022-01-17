@@ -23,4 +23,12 @@
         create_time,update_time,deleted,
         version
     </sql>
+    <select id="selectBasicInformation" resultMap="BaseResultMap">
+        select job_number,
+               name,
+               sex,
+               contact_information
+        from maintainer_account
+        where deleted = 0
+    </select>
 </mapper>

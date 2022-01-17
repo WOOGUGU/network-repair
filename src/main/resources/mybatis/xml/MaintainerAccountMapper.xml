@@ -3,9 +3,11 @@
 <mapper namespace="com.example.repair.mapper.MaintainerAccountMapper">
 
     <resultMap id="BaseResultMap" type="com.example.repair.entity.MaintainerAccount">
-        <id property="jobNumber" column="job_number" jdbcType="INTEGER"/>
+        <id property="jobNumber" column="job_number" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="passport" column="passport" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="CHAR"/>
+        <result property="contactInformation" column="contact_information" jdbcType="BIGINT"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="deleted" column="deleted" jdbcType="INTEGER"/>
@@ -17,7 +19,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         job_number
-        ,name,passport
+        ,name,passport,sex,contact_information,
         create_time,update_time,deleted,
         version
     </sql>

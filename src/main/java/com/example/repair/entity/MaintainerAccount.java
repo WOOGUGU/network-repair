@@ -32,6 +32,10 @@ public class MaintainerAccount implements Serializable {
 
     private String passport;
 
+    private String sex;
+
+    private String contactInformation;
+
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

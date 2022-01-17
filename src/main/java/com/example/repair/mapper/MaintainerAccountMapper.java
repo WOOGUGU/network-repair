@@ -17,6 +17,6 @@ import java.util.List;
  */
 @Mapper
 public interface MaintainerAccountMapper extends BaseMapper<MaintainerAccount> {
-    @Select("select job_number, name from maintainer_account")
+    @Select("select job_number, name,sex,contact_information from maintainer_account")
     List<MaintainerAccount> selectJobNumberAndName();
 }

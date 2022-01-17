@@ -2,17 +2,17 @@
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
 
     <title>Dashboard Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
     <!-- Custom styles for this template -->
-    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     <style type="text/css">
         /* Chart.js */
 
@@ -45,7 +45,7 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company
         name</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <input aria-label="Search" class="form-control form-control-dark w-100" placeholder="Search" type="text">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>
@@ -60,9 +60,9 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-home">
+                            <svg class="feather feather-home" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
                             </svg>
@@ -71,9 +71,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file">
+                            <svg class="feather feather-file" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
                                 <polyline points="13 2 13 9 20 9"></polyline>
                             </svg>
@@ -82,9 +82,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-shopping-cart">
+                            <svg class="feather feather-shopping-cart" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="9" cy="21" r="1"></circle>
                                 <circle cx="20" cy="21" r="1"></circle>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -94,9 +94,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-users">
+                            <svg class="feather feather-users" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="9" cy="7" r="4"></circle>
                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -107,21 +107,21 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-bar-chart-2">
-                                <line x1="18" y1="20" x2="18" y2="10"></line>
-                                <line x1="12" y1="20" x2="12" y2="4"></line>
-                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            <svg class="feather feather-bar-chart-2" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="18" x2="18" y1="20" y2="10"></line>
+                                <line x1="12" x2="12" y1="20" y2="4"></line>
+                                <line x1="6" x2="6" y1="20" y2="14"></line>
                             </svg>
                             Reports
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-layers">
+                            <svg class="feather feather-layers" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                                 <polyline points="2 17 12 22 22 17"></polyline>
                                 <polyline points="2 12 12 17 22 12"></polyline>
@@ -135,25 +135,25 @@
                     <span>Saved reports</span>
                     <a class="d-flex align-items-center text-muted"
                        href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-plus-circle">
+                        <svg class="feather feather-plus-circle" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                            <line x1="12" x2="12" y1="8" y2="16"></line>
+                            <line x1="8" x2="16" y1="12" y2="12"></line>
                         </svg>
                     </a>
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file-text">
+                            <svg class="feather feather-file-text" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="16" x2="8" y1="13" y2="13"></line>
+                                <line x1="16" x2="8" y1="17" y2="17"></line>
                                 <polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
                             Current month
@@ -161,13 +161,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file-text">
+                            <svg class="feather feather-file-text" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="16" x2="8" y1="13" y2="13"></line>
+                                <line x1="16" x2="8" y1="17" y2="17"></line>
                                 <polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
                             Last quarter
@@ -175,13 +175,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file-text">
+                            <svg class="feather feather-file-text" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="16" x2="8" y1="13" y2="13"></line>
+                                <line x1="16" x2="8" y1="17" y2="17"></line>
                                 <polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
                             Social engagement
@@ -189,13 +189,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file-text">
+                            <svg class="feather feather-file-text" fill="none" height="24" stroke="currentColor"
+                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                 width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="16" x2="8" y1="13" y2="13"></line>
+                                <line x1="16" x2="8" y1="17" y2="17"></line>
                                 <polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
                             Year-end sale
@@ -205,7 +205,7 @@
             </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" role="main">
             <h1>页面暂未开发</h1>
         </main>
     </div>
@@ -214,18 +214,18 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="../../static/asserts/js/jquery-3.2.1.slim.min.js"></script>
-<script type="text/javascript" src="../../static/asserts/js/popper.min.js"></script>
-<script type="text/javascript" src="../../static/asserts/js/bootstrap.min.js"></script>
+<script src="../../static/asserts/js/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+<script src="../../static/asserts/js/popper.min.js" type="text/javascript"></script>
+<script src="../../static/asserts/js/bootstrap.min.js" type="text/javascript"></script>
 
 <!-- Icons -->
-<script type="text/javascript" src="../../static/asserts/js/feather.min.js"></script>
+<script src="../../static/asserts/js/feather.min.js" type="text/javascript"></script>
 <script>
     feather.replace()
 </script>
 
 <!-- Graphs -->
-<script type="text/javascript" src="../../static/asserts/js/Chart.min.js"></script>
+<script src="../../static/asserts/js/Chart.min.js" type="text/javascript"></script>
 <script>
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {

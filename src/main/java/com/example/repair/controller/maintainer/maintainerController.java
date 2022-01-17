@@ -38,7 +38,8 @@ public class maintainerController {
         }
 
         QueryWrapper<PreliminaryScheme> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("FK_Maintainer_Account", maintainer_number);
+        queryWrapper.eq("FK_Maintainer_Account", maintainer_number)
+                .orderByDesc("preliminar_time");
         List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
 
         return ResultCode.getJson(preliminarySchemeList);
@@ -58,10 +59,10 @@ public class maintainerController {
         MaintenanceRecord maintenanceRecord = new MaintenanceRecord();
         maintenanceRecord.setFkWorkorderNumber(workorder_number);
         maintenanceRecord.setMaintenanceRecord(maintenance_record);
-        maintenanceRecord.setFkJobNumber(maintainer_number);
-        if (maintenanceRecordService.save(maintenanceRecord)) {
+        maintenanceRecord.setFkJobNumber(maintainer_number);//先新建一个
+        if (maintenanceRecordService.save(maintenanceRecord)) {//要是插入成功
             QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
-            queryWrapper
+            queryWrapper//要把对应的属于自己的，预处理的工单更新  把工单状态变成3
                     .eq("workorder_number", workorder_number)
                     .eq("workorder_state", "2");
             WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
@@ -109,6 +110,7 @@ public class maintainerController {
         queryWrapper
                 .eq("job_number", jobnumber)
                 .eq("passport", passport);
+
         MaintainerAccount maintainerAccount = maintainerAccountService.getOne(queryWrapper);
         if (maintainerAccount == null) {
             return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "用户不存在");

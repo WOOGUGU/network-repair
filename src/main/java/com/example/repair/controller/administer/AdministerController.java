@@ -41,7 +41,8 @@ public class AdministerController {
     @GetMapping("/administer/orderlist")
     public Object orderList() {
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("workorder_state", 1);
+        queryWrapper.eq("workorder_state", 1)
+                .orderByDesc("initiation_time");
         List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
         return ResultCode.getJson(workorderInformationList);
     }
@@ -62,7 +63,10 @@ public class AdministerController {
     // 管理员获得全部维修人员基本信息
     @GetMapping("/administer/maintainerlist")
     public Object maintainerList() {
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.maintainerlist();
+        QueryWrapper<MaintainerAccount> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .orderByDesc("create_time");
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(queryWrapper);
         return ResultCode.getJson(maintainerAccountList);
     }
 

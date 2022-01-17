@@ -8,8 +8,8 @@
 <h1>hello</h1>
 <!--<img th:src="${data}">-->
 <img th:src="${jsondata.data}">
-<form th:action="@{/test/upload}" method="POST" enctype="multipart/form-data">
-    <input type="file" name="file"/>
+<form enctype="multipart/form-data" method="POST" th:action="@{/test/upload}">
+    <input name="file" type="file"/>
     <input type="submit" value="上传头像"/>
 </form>
 </body>

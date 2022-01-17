@@ -30,7 +30,7 @@ public class WorkorderInformation implements Serializable {
     private Long workorderNumber;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp initiationTime;
 
     private String contactInformation;
@@ -55,12 +55,12 @@ public class WorkorderInformation implements Serializable {
     private Long fkStudentNumber;
 
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     @TableLogic

@@ -33,7 +33,7 @@ public class Notice implements Serializable {
     private String noticeTitle;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date releaseTime;
 
     @TableField("FK_job_number")
@@ -46,11 +46,11 @@ public class Notice implements Serializable {
     private Integer version;
 
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
 

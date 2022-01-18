@@ -43,6 +43,6 @@ public class FileController {
         }
         System.out.println("保存图片至==>" + filePath);
         //返回图片名称
-        return ResultCode.getJson(filePath);
+        return ResultCode.getJson(fileName);
     }
 }

@@ -11,7 +11,6 @@ import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
 import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,9 +106,11 @@ public class AdministerController {
     public Object addmaintainer(
             Long job_number,
             String name,
-            String passport
+            String passport,
+            String sex,
+            String contact_information
     ) {
-        if (job_number == null || "".equals(passport) || "".equals(name)) {
+        if (job_number == null || "".equals(passport) || "".equals(name) || "".equals(sex) || "".equals(contact_information)) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
 
@@ -117,6 +118,8 @@ public class AdministerController {
         maintainerAccount.setJobNumber(job_number);
         maintainerAccount.setName(name);
         maintainerAccount.setPassport(passport);
+        maintainerAccount.setSex(sex);
+        maintainerAccount.setContactInformation(contact_information);
 
         if (maintainerAccountService.save(maintainerAccount)) {
             return ResultCode.getJson("1");
@@ -131,7 +134,7 @@ public class AdministerController {
             Long administer_number,
             String passport,
             Long maintainer_number
-    ){
+    ) {
         if (administer_number == null || "".equals(passport) || maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -143,15 +146,16 @@ public class AdministerController {
         AdministratorAccount administratorAccount = administratorAccountService.getOne(queryWrapper);
         if (administratorAccount == null) {
             return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "管理员认证失败");
-        }else {
-            if(maintainerAccountService.removeById(maintainer_number)){
-                return ResultCode.getJson("1","成功移除维修员："+maintainer_number);
-            }else{
+        } else {
+            if (maintainerAccountService.removeById(maintainer_number)) {
+                return ResultCode.getJson("1", "成功移除维修员：" + maintainer_number);
+            } else {
                 return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "移除失败");
             }
         }
 
     }
+
     // 登入
     @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {

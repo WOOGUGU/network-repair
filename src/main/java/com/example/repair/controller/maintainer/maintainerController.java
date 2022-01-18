@@ -32,7 +32,7 @@ public class maintainerController {
 
     //维修员获得自己的工单
     @GetMapping("/maintainer/preliminarylist")
-    public JSONObject getPreliminaryListByMaintainerNumber(Long maintainer_number) {
+    public JSONObject preliminaryList(Long maintainer_number) {
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }

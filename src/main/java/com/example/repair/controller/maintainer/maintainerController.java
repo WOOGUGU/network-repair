@@ -99,10 +99,7 @@ public class maintainerController {
     //登录
     @PostMapping("login/maintainer")
     public JSONObject login(Long jobnumber, String passport) {
-        if (jobnumber == null || jobnumber.equals("")) {
-            return ResultCode.getJson("用户名或密码为空");
-        }
-        if (passport == null || passport.equals("")) {
+        if (jobnumber == null || "".equals(passport)) {
             return ResultCode.getJson("用户名或密码为空");
         }
 

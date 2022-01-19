@@ -40,11 +40,14 @@ public class studentController {
         }
 
         WorkorderInformation workorderInformation = new WorkorderInformation();
-        QueryWrapper queryWrapper = new QueryWrapper<>();
+        QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("workorder_number", workorder_number);
         workorderInformation = workorderInformationService.getOne(queryWrapper);
         //只有待评价的订单才可以评价
-        if (workorderInformation.getFkStudentNumber().equals(student_number) && "1".equals(workorderInformation.getEvaluationStatus())) {
+        if (
+                workorderInformation.getFkStudentNumber().equals(student_number) &&
+                        "1".equals(workorderInformation.getEvaluationStatus())
+        ) {
             workorderInformation.setMaintenanceSatisfaction(maintenance_satisfaction);
             workorderInformation.setEvaluation(evaluation);
             workorderInformation.setEvaluationStatus("2");

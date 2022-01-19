@@ -2,14 +2,18 @@ package com.example;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.repair.entity.MaintainerAccount;
 import com.example.repair.entity.Notice;
+import com.example.repair.entity.PreliminaryScheme;
 import com.example.repair.entity.WorkorderInformation;
 import com.example.repair.mapper.MaintainerAccountMapper;
 import com.example.repair.mapper.WorkorderInformationMapper;
 import com.example.repair.service.AdministratorAccountService;
 import com.example.repair.service.impl.MaintainerAccountServiceImpl;
 import com.example.repair.service.impl.NoticeServiceImpl;
+import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
+import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,11 +35,13 @@ class Demo01ApplicationTests {
     NoticeServiceImpl noticeService;
     @Autowired
     WorkorderInformationMapper workorderInformationMapper;
+    @Autowired
+    WorkorderInformationServiceImpl workorderInformationService;
+    @Autowired
+    PreliminarySchemeServiceImpl preliminarySchemeService;
 
     @Test
     void contextLoads() {
-        WorkorderInformation ans = workorderInformationMapper.getByFkStudentNumberAndMaxInitiationTime(1911111111L);
-        System.out.println(ans);
     }
 
     @Test

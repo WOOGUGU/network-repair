@@ -14,5 +14,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AdministratorAccountMapper extends BaseMapper<AdministratorAccount> {
-
+        public  int deleteMaintainerBack(Long maintainer_number);
 }

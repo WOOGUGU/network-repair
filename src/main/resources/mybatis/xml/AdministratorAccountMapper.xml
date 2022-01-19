@@ -19,4 +19,10 @@
         version
     </sql>
 
+<update id="deleteMaintainerBack" parameterType="java.lang.Long">
+    UPDATE maintainer_account
+    SET deleted = 0
+    WHERE job_number = #{maintainer_number,jdbcType=BIGINT}
+
+</update>
 </mapper>

@@ -156,6 +156,19 @@ public class AdministerController {
 
     }
 
+    //恢复已删除的维修工信息
+    @PostMapping("administer/deletemaintainerback")
+    public Object deleteMaintainerBack(Long maintainer_number){
+        if ( maintainer_number == null)
+        return ResultCode.getJson(ResponseCode.ParamLost.value,"缺少维修工号！");
+
+        if (administratorAccountService.deleteMaintainerBack(maintainer_number) == 1)
+        return  ResultCode.getJson("1","成功恢复！");
+        else
+            return  ResultCode.getJson(ResponseCode.SqlConfigError.value,"0","恢复失败！");
+
+    }
+
     // 登入
     @PostMapping("/login/administer")
     public Object login(Long jobnumber, String passport) {

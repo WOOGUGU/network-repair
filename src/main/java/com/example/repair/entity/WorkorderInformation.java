@@ -29,9 +29,9 @@ public class WorkorderInformation implements Serializable {
     @TableId(value = "workorder_number", type = IdType.AUTO)
     private Long workorderNumber;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Timestamp initiationTime;
+    private Date initiationTime;
 
     private String contactInformation;
 

@@ -4,7 +4,7 @@
 
     <resultMap id="BaseResultMap" type="com.example.repair.entity.Notice">
         <id property="noticeNumber" column="notice_number" jdbcType="INTEGER"/>
-        <result property="noticeContent" column="notice_content" jdbcType="CHAR"/>
+        <result property="noticeContent" column="notice_content" jdbcType="VARCHAR"/>
         <result property="noticeTitle" column="notice_title" jdbcType="VARCHAR"/>
         <result property="releaseTime" column="release_time" jdbcType="DATE"/>
         <result property="fkJobNumber" column="FK_job_number" jdbcType="INTEGER"/>

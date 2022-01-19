@@ -54,21 +54,5 @@ public class Notice implements Serializable {
     private Date updateTime;
 
 
-//    public String getCreateTime() {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        return simpleDateFormat.format(createTime)+"\t"+ CalendarUtils.datOfWeek(createTime);
-//    }
-//
-//    public String getReleaseTime() {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        return simpleDateFormat.format(releaseTime)+"\t"+CalendarUtils.datOfWeek(releaseTime);
-//    }
-//
-//    public String getUpdateTime() {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        return simpleDateFormat.format(updateTime)+"\t"+CalendarUtils.datOfWeek(updateTime);
-//    }
-
 
 }

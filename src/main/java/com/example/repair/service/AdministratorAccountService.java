@@ -12,5 +12,5 @@ import com.example.repair.entity.AdministratorAccount;
  * @since 2022-01-07
  */
 public interface AdministratorAccountService extends IService<AdministratorAccount> {
-
+    public  int deleteMaintainerBack(Long maintainer_number);
 }

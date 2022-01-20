@@ -63,9 +63,8 @@ public class AdministerController {
     @GetMapping("/administer/maintainerlist")
     public Object maintainerList() {
         QueryWrapper<MaintainerAccount> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .orderByDesc("create_time");
-        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.list(queryWrapper);
+        queryWrapper.orderByDesc("create_time");
+        List<MaintainerAccount> maintainerAccountList = maintainerAccountService.maintainerlist();
         return ResultCode.getJson(maintainerAccountList);
     }
 
@@ -158,15 +157,15 @@ public class AdministerController {
 
     //恢复已删除的维修工信息
     @PostMapping("administer/deletemaintainerback")
-    public Object deleteMaintainerBack(Long maintainer_number){
-        if ( maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value,"缺少维修工号！");
+    public Object deleteMaintainerBack(Long maintainer_number) {
+        if (maintainer_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少维修工号！");
         }
 
         if (administratorAccountService.deleteMaintainerBack(maintainer_number) == 1) {
-            return  ResultCode.getJson("1","成功恢复！");
+            return ResultCode.getJson("1", "成功恢复！");
         } else {
-            return  ResultCode.getJson(ResponseCode.SqlConfigError.value,"0","恢复失败！");
+            return ResultCode.getJson(ResponseCode.SqlConfigError.value, "0", "恢复失败！");
         }
 
     }

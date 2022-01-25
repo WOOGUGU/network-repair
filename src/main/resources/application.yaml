@@ -20,6 +20,7 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
 mybatis-plus:
   configuration:
+    # 配置日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:

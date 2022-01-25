@@ -12,10 +12,7 @@ import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ import java.util.List;
  *
  * @author WOOGUGU
  */
-
+@CrossOrigin
 @RestController
 public class AdministerController {
     @Autowired

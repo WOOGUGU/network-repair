@@ -27,7 +27,8 @@
         select job_number,
                name,
                sex,
-               contact_information
+               contact_information,
+               create_time
         from maintainer_account
         where deleted = 0
     </select>

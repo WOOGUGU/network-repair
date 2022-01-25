@@ -76,28 +76,38 @@ public class AdministerController {
             Long administrator_number,
             Long maintainer_number
     ) {
-        if (workorder_number == null || administrator_number == null || maintainer_number == null) {
-            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
+
+        QueryWrapper<PreliminaryScheme> preQueryWrapper = new QueryWrapper<>();
+        preQueryWrapper
+                .eq("FK_workorder_number",workorder_number);
+        if (preliminarySchemeService.getOne(preQueryWrapper) == null) {
+
+
+            if (workorder_number == null || administrator_number == null || maintainer_number == null) {
+                return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
+            }
+
+            PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
+            preliminaryScheme.setFkWorkorderNumber(workorder_number);
+            preliminaryScheme.setFkMaintainerAccount(maintainer_number);
+            preliminaryScheme.setFkJobNumber(administrator_number);
+            preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
+            if (preliminarySchemeService.save(preliminaryScheme)) {
+
+                QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
+                queryWrapper
+                        .eq("workorder_number", workorder_number);
+                WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
+                workorderInformation.setWorkorderState("2");
+                workorderInformationService.updateById(workorderInformation);
+
+                return ResultCode.getJson("1");
+            } else {
+                return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
+            }
+
         }
-
-        PreliminaryScheme preliminaryScheme = new PreliminaryScheme();
-        preliminaryScheme.setFkWorkorderNumber(workorder_number);
-        preliminaryScheme.setFkMaintainerAccount(maintainer_number);
-        preliminaryScheme.setFkJobNumber(administrator_number);
-        preliminaryScheme.setPreliminaryProgram(preliminary_porgram);
-        if (preliminarySchemeService.save(preliminaryScheme)) {
-
-            QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
-            queryWrapper
-                    .eq("workorder_number", workorder_number);
-            WorkorderInformation workorderInformation = workorderInformationService.getOne(queryWrapper);
-            workorderInformation.setWorkorderState("2");
-            workorderInformationService.updateById(workorderInformation);
-
-            return ResultCode.getJson("1");
-        } else {
-            return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
-        }
+        else return ResultCode.getJson(ResponseCode.hasNotAccess.value,"0","该工单已被管理员处理");
     }
 
     // 管理员添加维修员

@@ -20,7 +20,9 @@ import java.util.UUID;
 public class FileController {
 
     @PostMapping(value = "/fileUpload")
-    public Object fileUpload(@RequestParam(value = "file") MultipartFile file) {
+    public Object fileUpload(
+            @RequestParam(value = "file") MultipartFile file
+    ) {
         if (file.isEmpty()) {
             System.out.println("请选择图片");
         }

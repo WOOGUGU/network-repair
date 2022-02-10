@@ -15,6 +15,7 @@ import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,7 +33,9 @@ public class maintainerController {
 
     //维修员获得自己的工单
     @GetMapping("/maintainer/preliminarylist")
-    public JSONObject preliminaryList(Long maintainer_number) {
+    public JSONObject preliminaryList(
+            @RequestParam Long maintainer_number
+    ) {
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -48,9 +51,9 @@ public class maintainerController {
     //维修员填写工单记录
     @PostMapping("/maintainer/maintenance")
     public JSONObject fillWorkorder(
-            Long workorder_number,
-            String maintenance_record,
-            Long maintainer_number
+            @RequestParam Long workorder_number,
+            @RequestParam String maintenance_record,
+            @RequestParam Long maintainer_number
     ) {
         if (workorder_number == null || maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
@@ -81,7 +84,9 @@ public class maintainerController {
 
     //维修员查看某个工单
     @GetMapping("/maintainer/preliminary")
-    public JSONObject getOneWorkorder(Long workorder_number) {
+    public JSONObject getOneWorkorder(
+            @RequestParam Long workorder_number
+    ) {
         if (workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -98,7 +103,10 @@ public class maintainerController {
 
     //登录
     @PostMapping("login/maintainer")
-    public JSONObject login(Long jobnumber, String passport) {
+    public JSONObject login(
+            @RequestParam Long jobnumber,
+            @RequestParam String passport
+    ) {
         if (jobnumber == null || "".equals(passport)) {
             return ResultCode.getJson("用户名或密码为空");
         }

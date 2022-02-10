@@ -10,6 +10,7 @@ import com.example.repair.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,10 +31,10 @@ public class studentController {
     // 学生提交评价
     @PostMapping("/student/evaluate")
     public Object evaluate(
-            Long student_number,
-            Long workorder_number,
-            float maintenance_satisfaction,
-            String evaluation
+            @RequestParam Long student_number,
+            @RequestParam Long workorder_number,
+            @RequestParam float maintenance_satisfaction,
+            @RequestParam String evaluation
     ) {
         if (student_number == null || workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
@@ -62,11 +63,11 @@ public class studentController {
     // 学生提交工单
     @PostMapping("/student/submitorder")
     public Object submitorder(
-            Long student_number,
-            String contact_information,
-            String workorder_content,
-            String address,
-            String picture_address
+            @RequestParam Long student_number,
+            @RequestParam String contact_information,
+            @RequestParam String workorder_content,
+            @RequestParam String address,
+            @RequestParam String picture_address
     ) {
         if (student_number == null || contact_information == null || workorder_content == null || address == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
@@ -89,7 +90,9 @@ public class studentController {
 
     // 学生获得最近的工单
     @GetMapping("/student/getlatestorder")
-    public Object getlastorder(Long student_number) {
+    public Object getlastorder(
+            @RequestParam Long student_number
+    ) {
         if (student_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
         }
@@ -98,7 +101,9 @@ public class studentController {
 
     // 学生查看工单列表
     @GetMapping("/student/orderlist")
-    public Object orderList(Long student_number) {
+    public Object orderList(
+            @RequestParam Long student_number
+    ) {
         if (student_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "学号为空！请重新访问");
         }
@@ -112,7 +117,9 @@ public class studentController {
 
     // 学生查看某工单详细信息
     @GetMapping("/student/getorder")
-    public Object getOrder(Long workorder_number) {
+    public Object getOrder(
+            @RequestParam Long workorder_number
+    ) {
         if (workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "工单号为空");
         }
@@ -124,7 +131,10 @@ public class studentController {
     }
 
     @PostMapping("/login/student")//测试成功
-    public Object login(Long student_number, String passport) {
+    public Object login(
+            @RequestParam Long student_number,
+            @RequestParam String passport
+    ) {
         //判断用户名和密码是否为空或者空串
         if (student_number == null || "".equals(passport)) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");

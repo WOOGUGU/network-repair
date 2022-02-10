@@ -37,7 +37,8 @@ public class AdministerController {
     @GetMapping("/administer/orderlist")
     public Object orderList() {
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("workorder_state", 1)
+        queryWrapper
+                .eq("workorder_state", 1)
                 .orderByDesc("initiation_time");
         List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
         return ResultCode.getJson(workorderInformationList);
@@ -45,7 +46,9 @@ public class AdministerController {
 
     // 管理员获得某工单详细信息
     @GetMapping("/administer/getorder")
-    public Object getOrder(Long workorder_number) {
+    public Object getOrder(
+            @RequestParam Long workorder_number
+    ) {
         if (workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -68,17 +71,14 @@ public class AdministerController {
     // 管理员填写或选择初步方案
     @PostMapping("/administer/preliminary")
     public Object preliminary(
-            Long workorder_number,
-            String preliminary_porgram,
-            Long administrator_number,
-            Long maintainer_number
+            @RequestParam Long workorder_number,
+            @RequestParam String preliminary_porgram,
+            @RequestParam Long administrator_number,
+            @RequestParam Long maintainer_number
     ) {
-
         QueryWrapper<PreliminaryScheme> preQueryWrapper = new QueryWrapper<>();
-        preQueryWrapper
-                .eq("FK_workorder_number",workorder_number);
+        preQueryWrapper.eq("FK_workorder_number", workorder_number);
         if (preliminarySchemeService.getOne(preQueryWrapper) == null) {
-
 
             if (workorder_number == null || administrator_number == null || maintainer_number == null) {
                 return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
@@ -103,18 +103,19 @@ public class AdministerController {
                 return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "添加失败");
             }
 
+        } else {
+            return ResultCode.getJson(ResponseCode.hasNotAccess.value, "0", "该工单已被管理员处理");
         }
-        else return ResultCode.getJson(ResponseCode.hasNotAccess.value,"0","该工单已被管理员处理");
     }
 
     // 管理员添加维修员
     @PostMapping("/administer/addmaintainer")
     public Object addmaintainer(
-            Long job_number,
-            String name,
-            String passport,
-            String sex,
-            String contact_information
+            @RequestParam Long job_number,
+            @RequestParam String name,
+            @RequestParam String passport,
+            @RequestParam String sex,
+            @RequestParam String contact_information
     ) {
         if (job_number == null || "".equals(passport) || "".equals(name) || "".equals(sex) || "".equals(contact_information)) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
@@ -137,9 +138,9 @@ public class AdministerController {
     // 管理员删除维修员
     @DeleteMapping("/administer/deletemaintainer")
     public Object deletemaintainer(
-            Long administer_number,
-            String passport,
-            Long maintainer_number
+            @RequestParam Long administer_number,
+            @RequestParam String passport,
+            @RequestParam Long maintainer_number
     ) {
         if (administer_number == null || "".equals(passport) || maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
@@ -159,12 +160,13 @@ public class AdministerController {
                 return ResultCode.getJson(ResponseCode.INTERNAL_SERVER_ERROR.value, "0", "移除失败");
             }
         }
-
     }
 
     //恢复已删除的维修工信息
     @PostMapping("administer/deletemaintainerback")
-    public Object deleteMaintainerBack(Long maintainer_number) {
+    public Object deleteMaintainerBack(
+            @RequestParam Long maintainer_number
+    ) {
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "缺少维修工号！");
         }
@@ -179,8 +181,10 @@ public class AdministerController {
 
     // 登入
     @PostMapping("/login/administer")
-    public Object login(Long jobnumber, String passport) {
-
+    public Object login(
+            @RequestParam Long jobnumber,
+            @RequestParam String passport
+    ) {
         if (jobnumber == null || "".equals(passport)) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
         }

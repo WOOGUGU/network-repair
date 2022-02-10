@@ -20,14 +20,19 @@ public class uploadertestController {
 
 
     @GetMapping("/test/wel")
-    public String goInex(Model model) {
+    public String goInex(
+            @RequestParam Model model
+    ) {
 
         model.addAttribute("jsondata", ResultCode.getJson("http://r5hpwa7fv.hb-bkt.clouddn.com/39e7971b-ef41-4fa8-beca-f5c9f43a624b.png"));
         return "pages/page";
     }
 
     @PostMapping("/test/upload")
-    public String goInex(@RequestParam("file") MultipartFile file, Model model) {
+    public String goInex(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam Model model
+    ) {
         String originalFileName = file.getOriginalFilename();
         String fileName = UUID.randomUUID().toString() + "." + StringUtils.substringAfterLast(originalFileName, ".");
         boolean upload = qiniuUtils.upload(file, fileName);

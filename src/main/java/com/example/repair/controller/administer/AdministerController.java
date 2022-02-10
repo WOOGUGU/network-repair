@@ -11,6 +11,7 @@ import com.example.repair.service.impl.PreliminarySchemeServiceImpl;
 import com.example.repair.service.impl.WorkorderInformationServiceImpl;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -197,7 +198,8 @@ public class AdministerController {
         if (administratorAccount == null) {
             return ResultCode.getJson(ResponseCode.IndexLost.value, "0", "用户不存在");
         } else {
-            return ResultCode.getJson("1", "用户存在");
+            administratorAccount.setPassport(null);
+            return ResultCode.getJson(administratorAccount, "用户存在");
         }
     }
 }

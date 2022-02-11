@@ -45,6 +45,6 @@ public class FileController {
         }
         System.out.println("保存图片至==>" + filePath);
         //返回图片名称
-        return ResultCode.getJson(fileName);
+        return ResultCode.getJson("https://cn-zz-bgp-4.natfrp.cloud:25363/" + fileName);
     }
 }

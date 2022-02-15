@@ -34,12 +34,34 @@ public class AdministerController {
     @Autowired
     AdministratorAccountServiceImpl administratorAccountService;
 
-    // 管理员获取工单
+    // 管理员获取待处理工单
     @GetMapping("/administer/orderlist")
     public Object orderList() {
         QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
         queryWrapper
                 .eq("workorder_state", 1)
+                .orderByDesc("initiation_time");
+        List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
+        return ResultCode.getJson(workorderInformationList);
+    }
+
+    // 管理员获取待维修工单
+    @GetMapping("/administer/orderlist2")
+    public Object orderList2() {
+        QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("workorder_state", 2)
+                .orderByDesc("initiation_time");
+        List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
+        return ResultCode.getJson(workorderInformationList);
+    }
+
+    // 管理员获已完成工单
+    @GetMapping("/administer/orderlist3")
+    public Object orderList3() {
+        QueryWrapper<WorkorderInformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("workorder_state", 3)
                 .orderByDesc("initiation_time");
         List<WorkorderInformation> workorderInformationList = workorderInformationService.list(queryWrapper);
         return ResultCode.getJson(workorderInformationList);

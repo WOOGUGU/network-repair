@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -46,6 +47,60 @@ public class maintainerController {
         List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
 
         return ResultCode.getJson(preliminarySchemeList);
+    }
+
+    //维修员获得自己的待维修工单
+    @GetMapping("/maintainer/preliminarylist2")
+    public JSONObject preliminaryList2(
+            @RequestParam Long maintainer_number
+    ) {
+        if (maintainer_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
+        }
+
+        QueryWrapper<PreliminaryScheme> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("FK_Maintainer_Account", maintainer_number)
+                .orderByDesc("preliminar_time");
+        List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
+        List<Long> workorderNumberList= new LinkedList<>();
+        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList){
+            workorderNumberList.add(preliminaryScheme.getFkWorkorderNumber());
+        }
+        List<WorkorderInformation> workorderInformationList = (List<WorkorderInformation>) workorderInformationService.listByIds(workorderNumberList);
+        List<WorkorderInformation> waitList = new LinkedList<>();
+        for (WorkorderInformation workorderInformation : workorderInformationList){
+            if ("2".equals(workorderInformation.getWorkorderState())) {
+                waitList.add(workorderInformation);
+            }
+        }
+        return ResultCode.getJson(waitList);
+    }
+
+    //维修员获得自己的已完成工单
+    @GetMapping("/maintainer/preliminarylist3")
+    public JSONObject preliminaryList3(
+            @RequestParam Long maintainer_number
+    ) {
+        if (maintainer_number == null) {
+            return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
+        }
+
+        QueryWrapper<PreliminaryScheme> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("FK_Maintainer_Account", maintainer_number)
+                .orderByDesc("preliminar_time");
+        List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
+        List<Long> workorderNumberList= new LinkedList<>();
+        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList){
+            workorderNumberList.add(preliminaryScheme.getFkWorkorderNumber());
+        }
+        List<WorkorderInformation> workorderInformationList = (List<WorkorderInformation>) workorderInformationService.listByIds(workorderNumberList);
+        List<WorkorderInformation> waitList = new LinkedList<>();
+        for (WorkorderInformation workorderInformation : workorderInformationList){
+            if ("3".equals(workorderInformation.getWorkorderState())) {
+                waitList.add(workorderInformation);
+            }
+        }
+        return ResultCode.getJson(waitList);
     }
 
     //维修员填写工单记录

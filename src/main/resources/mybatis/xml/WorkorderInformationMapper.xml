@@ -22,7 +22,7 @@
         ,initiation_time,contact_information,
         address,workorder_content,picture_address,
         workorder_state,FK_student_number,create_time,
-        update_time,deleted,version,fixed_time
+        update_time,deleted,version,fixed_time,evaluation_status
     </sql>
     <select id="getByFkStudentNumberAndMaxInitiationTime" resultMap="BaseResultMap">
         SELECT

@@ -67,7 +67,8 @@ public class studentController {
             @RequestParam String contact_information,
             @RequestParam String workorder_content,
             @RequestParam String address,
-            @RequestParam String picture_address
+            @RequestParam String fixed_time,
+            @RequestParam(required = false) String picture_address
     ) {
         if (student_number == null || contact_information == null || workorder_content == null || address == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
@@ -79,6 +80,7 @@ public class studentController {
         workorderInformation.setWorkorderContent(workorder_content);
         workorderInformation.setAddress(address);
         workorderInformation.setPictureAddress(picture_address);
+        workorderInformation.setFixedTime(fixed_time);
         workorderInformation.setWorkorderState("1");
 
         if (workorderInformationService.save(workorderInformation)) {

@@ -11,7 +11,7 @@
     <!-- 打包配置 -->
     <groupId>com.example</groupId>
     <artifactId>network-repair</artifactId>
-    <version>0.0.6-C-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
     <name>network-repair</name>
     <packaging>jar</packaging>
 

@@ -7,6 +7,7 @@ import com.example.repair.service.StudentAccountService;
 import com.example.repair.service.WorkorderInformationService;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author WOOGUGU
  */
 
+@Slf4j
 @RestController
 public class studentController {
     @Autowired
@@ -36,6 +38,7 @@ public class studentController {
             @RequestParam float maintenance_satisfaction,
             @RequestParam String evaluation
     ) {
+        log.info("student-post : evaluate ? workorder_number = " + workorder_number);
         if (student_number == null || workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
         }
@@ -70,6 +73,7 @@ public class studentController {
             @RequestParam String fixed_time,
             @RequestParam(required = false) String picture_address
     ) {
+        log.info("student-post : submitorder ? student_number = " + student_number);
         if (student_number == null || contact_information == null || workorder_content == null || address == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
         }
@@ -95,6 +99,7 @@ public class studentController {
     public Object getlastorder(
             @RequestParam Long student_number
     ) {
+        log.info("student-get : get latest order ? student_number = " + student_number);
         if (student_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数！");
         }
@@ -106,6 +111,7 @@ public class studentController {
     public Object orderList(
             @RequestParam Long student_number
     ) {
+        log.info("student-get : order list ? student_number = " + student_number);
         if (student_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "学号为空！请重新访问");
         }
@@ -122,6 +128,7 @@ public class studentController {
     public Object getOrder(
             @RequestParam Long workorder_number
     ) {
+        log.info("student-get : get order ? workorder_number = " + workorder_number);
         if (workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "工单号为空");
         }
@@ -132,11 +139,13 @@ public class studentController {
         return ResultCode.getJson(workorderInformationList);
     }
 
-    @PostMapping("/login/student")//测试成功
+    // 学生登入
+    @PostMapping("/login/student")
     public Object login(
             @RequestParam Long student_number,
             @RequestParam String passport
     ) {
+        log.info("student-login : login ? student_number = " + student_number);
         //判断用户名和密码是否为空或者空串
         if (student_number == null || "".equals(passport)) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "用户名或密码为空");
@@ -155,4 +164,3 @@ public class studentController {
         }
     }
 }
-

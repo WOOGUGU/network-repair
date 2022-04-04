@@ -19,16 +19,19 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
 mybatis-plus:
-  configuration:
+#  configuration:
     # 配置日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
   mapper-locations: classpath:mybatis/xml/*.xml
 
-
+# 输出日志文件到本地
+logging:
+  file: mylogs.log
+  path: /home/woogugu/Desktop/work/logs
 
 
 

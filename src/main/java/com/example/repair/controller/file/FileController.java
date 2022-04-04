@@ -75,7 +75,7 @@ public class FileController {
                 e.printStackTrace();
             }
             log.info("保存图片至==>" + filePath);
-            list.add("https://cn-cd-dx-6.natfrp.cloud:19751/" + fileName);
+            list.add("https://repair.woogugu.cn/" + fileName);
         }
         return ResultCode.getJson(list);
     }

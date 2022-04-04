@@ -12,6 +12,7 @@ import com.example.repair.service.PreliminarySchemeService;
 import com.example.repair.service.WorkorderInformationService;
 import com.example.repair.util.ResponseCode;
 import com.example.repair.util.ResultCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedList;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class maintainerController {
     @Autowired
@@ -37,6 +39,7 @@ public class maintainerController {
     public JSONObject preliminaryList(
             @RequestParam Long maintainer_number
     ) {
+        log.info("maintainer-get : preliminary list ? maintainer_number = " + maintainer_number);
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -54,6 +57,7 @@ public class maintainerController {
     public JSONObject preliminaryList2(
             @RequestParam Long maintainer_number
     ) {
+        log.info("maintainer-get : preliminary list 2 ? maintainer_number = " + maintainer_number);
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -62,13 +66,13 @@ public class maintainerController {
         queryWrapper.eq("FK_Maintainer_Account", maintainer_number)
                 .orderByDesc("preliminar_time");
         List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
-        List<Long> workorderNumberList= new LinkedList<>();
-        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList){
+        List<Long> workorderNumberList = new LinkedList<>();
+        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList) {
             workorderNumberList.add(preliminaryScheme.getFkWorkorderNumber());
         }
         List<WorkorderInformation> workorderInformationList = (List<WorkorderInformation>) workorderInformationService.listByIds(workorderNumberList);
         List<WorkorderInformation> waitList = new LinkedList<>();
-        for (WorkorderInformation workorderInformation : workorderInformationList){
+        for (WorkorderInformation workorderInformation : workorderInformationList) {
             if ("2".equals(workorderInformation.getWorkorderState())) {
                 waitList.add(workorderInformation);
             }
@@ -81,6 +85,7 @@ public class maintainerController {
     public JSONObject preliminaryList3(
             @RequestParam Long maintainer_number
     ) {
+        log.info("maintainer-get : preliminary list 3 ? maintainer_number = " + maintainer_number);
         if (maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -89,13 +94,13 @@ public class maintainerController {
         queryWrapper.eq("FK_Maintainer_Account", maintainer_number)
                 .orderByDesc("preliminar_time");
         List<PreliminaryScheme> preliminarySchemeList = preliminarySchemeService.list(queryWrapper);
-        List<Long> workorderNumberList= new LinkedList<>();
-        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList){
+        List<Long> workorderNumberList = new LinkedList<>();
+        for (PreliminaryScheme preliminaryScheme : preliminarySchemeList) {
             workorderNumberList.add(preliminaryScheme.getFkWorkorderNumber());
         }
         List<WorkorderInformation> workorderInformationList = (List<WorkorderInformation>) workorderInformationService.listByIds(workorderNumberList);
         List<WorkorderInformation> waitList = new LinkedList<>();
-        for (WorkorderInformation workorderInformation : workorderInformationList){
+        for (WorkorderInformation workorderInformation : workorderInformationList) {
             if ("3".equals(workorderInformation.getWorkorderState())) {
                 waitList.add(workorderInformation);
             }
@@ -110,6 +115,7 @@ public class maintainerController {
             @RequestParam String maintenance_record,
             @RequestParam Long maintainer_number
     ) {
+        log.info("maintainer-post : pmaintenance ? workorder_number = " + workorder_number);
         if (workorder_number == null || maintainer_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -142,6 +148,7 @@ public class maintainerController {
     public JSONObject getOneWorkorder(
             @RequestParam Long workorder_number
     ) {
+        log.info("maintainer-get : preliminary ? workorder_number = " + workorder_number);
         if (workorder_number == null) {
             return ResultCode.getJson(ResponseCode.ParamLost.value, "0", "缺少必要参数");
         }
@@ -162,6 +169,7 @@ public class maintainerController {
             @RequestParam Long jobnumber,
             @RequestParam String passport
     ) {
+        log.info("maintainer-login : login ? jobnumber = " + jobnumber);
         if (jobnumber == null || "".equals(passport)) {
             return ResultCode.getJson("用户名或密码为空");
         }

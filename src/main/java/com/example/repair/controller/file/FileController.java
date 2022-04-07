@@ -50,7 +50,7 @@ public class FileController {
         }
         log.info("保存图片至==>" + filePath);
         //返回图片名称
-        return ResultCode.getJson("https://cn-cd-dx-6.natfrp.cloud:19751/" + fileName);
+        return ResultCode.getJson("https://repair.woogugu.cn/" + fileName);
     }
 
     @PostMapping("/filesUpload")

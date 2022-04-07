@@ -3,10 +3,10 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cn-cd-dx-6.natfrp.cloud:60065/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:< database url >?useUnicode=true&characterEncoding=UTF-8&useSSL=false
 #    url: jdbc:mysql://localhost:3306/demo_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: Root_12root
+    username: < databaseName >
+    password: < databasePassword >
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -14,7 +14,7 @@ spring:
   servlet:
     multipart:
       enabled: true
-  # 这个东西很神奇，不加就报错，不信你试试（
+  # 欸嘿
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
